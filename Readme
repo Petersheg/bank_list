@@ -13,9 +13,9 @@ Most of the functionalies such as Transfer money, Loan request, Close account ar
 At first user is requested to login with their details, for the sake of simplicity Users information is local within 
 the system and i will write out the usernames and password 
 [
-    {user1 : 'js', password: '1111'}
-    {user1 : 'jd', password: '222'}
-    {user1 : 'stw', password: '3333'}
+    {user1 : 'po', password: '1111'}
+    {user1 : 'oj', password: '222'}
+    {user1 : 'ak', password: '3333'}
     {user1 : 'ss', password: '4444'}
 ]
 with any of these details any user can be logged in.
@@ -37,4 +37,4 @@ User can close their account by specifing their username and password;
 >>>> SORTING USER's TRACK
     User can finally sort their track by acsending order or in order in which their are exucuted.
 
-    
+
