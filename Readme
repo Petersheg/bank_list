@@ -1,0 +1,40 @@
+------------------------- SYSTEM PURPOSE---------------------------
+The Purpose of this mini project is just to demonstrate the knownledge of some array methods learnt
+Array methods such as (Push,Pop,Shift,Unshift,Splice,Reverse,fill,filter,map,slice,concat,some,every,
+inclucludes,forEach,reduce etc);
+
+------------------------- SYSTEM FUNCTIONALITIES---------------------------
+Most of the functionalies such as Transfer money, Loan request, Close account are build with then methods above;
+
+
+------------------------- SYSTEM OPERATION FLOW---------------------------
+
+>>>>LOGIN
+At first user is requested to login with their details, for the sake of simplicity Users information is local within 
+the system and i will write out the usernames and password 
+[
+    {user1 : 'js', password: '1111'}
+    {user1 : 'jd', password: '222'}
+    {user1 : 'stw', password: '3333'}
+    {user1 : 'ss', password: '4444'}
+]
+with any of these details any user can be logged in.
+
+>>>> Make Transfer
+Each user after login can make Transfer by providing another username ( which will be username eg jd ) and amount,
+after making the Transfer, 
+    --total amount will decrease by the amount Transfered
+    --then a debit transaction will appear on user track
+
+>>>> REQUEST A LOAN
+User can also make request for load by suppling amount which should be at least 10% of his/her deposit then;
+    -- Total amount will get incraesed by the amount specifield;
+    -- A deposit traction will be added to user's track
+
+>>>> CLOSE ACCOUNT
+User can close their account by specifing their username and password;
+
+>>>> SORTING USER's TRACK
+    User can finally sort their track by acsending order or in order in which their are exucuted.
+
+    
