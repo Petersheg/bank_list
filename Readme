@@ -21,7 +21,7 @@ the system and i will write out the usernames and password
 with any of these details any user can be logged in.
 
 >>>> Make Transfer
-Each user after login can make Transfer by providing another username ( which will be username eg jd ) and amount,
+Each user after login can make Transfer by providing another username ( which should be amoung the listed users above) and amount,
 after making the Transfer, 
     --total amount will decrease by the amount Transfered
     --then a debit transaction will appear on user track
