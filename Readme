@@ -11,7 +11,7 @@ Most of the functionalies such as Transfer money, Loan request, Close account ar
 
 >>>>LOGIN
 At first user is requested to login with their details, for the sake of simplicity Users information is local within 
-the system and i will write out the usernames and password 
+the system and i will write out the usernames and password, this can be expand to a normal database system in the future. 
 [
     {user1 : 'po', password: '1111'}
     {user1 : 'oj', password: '2222'}
