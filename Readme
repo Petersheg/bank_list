@@ -14,7 +14,7 @@ At first user is requested to login with their details, for the sake of simplici
 the system and i will write out the usernames and password 
 [
     {user1 : 'po', password: '1111'}
-    {user1 : 'oj', password: '222'}
+    {user1 : 'oj', password: '2222'}
     {user1 : 'ak', password: '3333'}
     {user1 : 'ss', password: '4444'}
 ]
