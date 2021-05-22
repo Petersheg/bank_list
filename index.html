@@ -19,21 +19,8 @@
     <nav>
       <p class="welcome">Log in to get started</p>
       <img src="logo.png" alt="Logo" class="logo" />
-      <form class="login">
-        <input
-          type="text"
-          placeholder="user"
-          class="login__input login__input--user"
-        />
-        <!-- In practice, use type="password" -->
-        <input
-          type="text"
-          placeholder="PIN"
-          maxlength="4"
-          class="login__input login__input--pin"
-        />
-        <button class="login__btn">&rarr;</button>
-      </form>
+      <button class="btn open_signup-modal">Sign Up</button>
+      <button class="btn open_login-modal">Login</button>
     </nav>
 
     <main class="app">
@@ -119,28 +106,52 @@
       </p>
     </main>
 
-    <!-- USER REGISTRATION -->
-    <div id="login-box">
-      <div class="left">
-        <h1>Sign up</h1>
-        
-        <input type="text" name="username" placeholder="Username" class="username" />
-        <input type="text" name="email" placeholder="E-mail" class="email" />
-        <input type="password" name="password" placeholder="Password" class="password"/>
-        <input type="password" name="password2" placeholder="Retype password" class="password" />
-        
-        <input type="submit" name="signup_submit" value="Sign me up"  class="submit"/>
-      </div>
-      
-      <div class="right">
-        <span class="loginwith">Sign in with<br />social network</span>
-        
+    <!--SIGN UP MODAL -->
+    <div class="modal hidden signup_modal">
+      <button class="btn--close-modal signup_btn--close-modal">&times;</button>
+      <h2 class="modal__header">
+        <span class="highlight">welcome</span><br />
+        Register Yourself! 
+      </h2>
+
+      <form class="modal__form">
+        <label>Full Name</label>
+        <input type="text" name="fullname"/>
+        <label>Mobile</label>
+        <input type="phone" name="mobile"/>
+        <label>BVN</label>
+        <input type="phone" name="bvn"/>
+        <label>Starting Amount</label>
+        <input type="phone" name="amount"/>
+        <button class="btn">Register &rarr;</button>
+      </form>
+
+      <div class="social">
         <button class="social-signin facebook">Log in with facebook</button>
-        <button class="social-signin twitter">Log in with Twitter</button>
-        <button class="social-signin google">Log in with Google+</button>
       </div>
       <div class="or">OR</div>
+
+
     </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal hidden login_modal">
+      <button class="btn--close-modal login_btn--close-modal">&times;</button>
+      <h2 class="modal__header">
+        <span class="highlight">Hello</span><br />
+        Kindly Login! 
+      </h2>
+
+      <form class="modal__form">
+        <label>User Name</label>
+        <input class="login__input--user" type="text" name="fullname"/>
+        <label>Password</label>
+        <input class="login__input--pin" type="phone" name="password" />
+        <button class="btn login__btn">Login &rarr;</button>
+      </form>
+    </div>
+
+    <div class="overlay hidden"></div>
 
     <!-- <footer>
       &copy; by Jonas Schmedtmann. Don't claim as your own :)
