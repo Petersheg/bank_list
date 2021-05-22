@@ -154,8 +154,27 @@ newAccount.createUserName(accounts);
 /*This Class will handle everything functionality perform by the user
   eg user login, Transfer, Loan and closing account or sorting their transaction*/ 
 let currentUser, sorted = false;
+
 class User{
 
+  constructor(){
+    console.log(this);
+    // Login Functionality
+    this.userLogin();
+
+    // Transfer Functiuonality
+    this.userTransfer();
+
+    // Loan Functionality
+    this.userLoan();
+
+    // Close Account functionality
+    this.closAcc();
+
+    // Sort functionality
+    this.transactionSort()
+  }
+  
   userLogin(){
     btnLogin.addEventListener('click',(e)=>{
       e.preventDefault();
@@ -253,20 +272,5 @@ class User{
 }
 
 const user = new User
-
-// Login Functionality
-user.userLogin();
-
-// Transfer Functiuonality
-user.userTransfer();
-
-// Loan Functionality
-user.userLoan();
-
-// Close Account functionality
-user.closAcc();
-
-// Sort functionality
-user.transactionSort()
 
 /////////////////////////////////////////////////
