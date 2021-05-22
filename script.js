@@ -54,6 +54,7 @@ const btnClose = document.querySelector('.form__btn--close');
 const btnSort = document.querySelector('.btn--sort');
 const btnLoginOpenModal = document.querySelector('.open_login-modal');
 const btnSignupOpenModal = document.querySelector('.open_signup-modal');
+const btnLogOut = document.querySelector('.logout');
 
 const inputLoginUsername = document.querySelector('.login__input--user');
 const inputLoginPin = document.querySelector('.login__input--pin');
@@ -187,7 +188,13 @@ class User{
       e.preventDefault();
       currentUser = accounts.find(acc => acc.userName === inputLoginUsername.value);
       console.log(currentUser);
-    
+      
+      const disPlayLogoutBtn = function(){
+        btnLoginOpenModal.classList.add('hidden');
+        btnSignupOpenModal.classList.add('hidden');
+        btnLogOut.classList.remove('hidden');
+      }
+
       if(currentUser?.pin === Number(inputLoginPin.value)){
     
         // Make UI visible
@@ -203,7 +210,7 @@ class User{
        
         // Close Modal
         modal.hideModal(loginModal);
-        
+        disPlayLogoutBtn(btnLoginOpenModal, btnSignupOpenModal);
         // update UI
         newAccount.updateUI(currentUser);
       }
@@ -307,12 +314,12 @@ class Modal{
 
     // Add event listener to the btn passed in
     btn.addEventListener('click', ()=>{
-      close(modal);
+      this.hideModal(modal);
     })
 
     // Add evebt listener to overlay to close modal
     overlay.addEventListener('click',()=>{
-      close(modal);
+      this.hideModal(modal);
     })
   }
 }
