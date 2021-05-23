@@ -3,7 +3,7 @@
 eg user login, Transfer, Loan and closing account or sorting their transaction*/ 
 
 const {Modal} =await import('./modal.js');
-const {Account} = await import('./account.js')
+const {Account} = await import('./account.js');
 
 // Data
 const account1 = {
