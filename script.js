@@ -181,6 +181,9 @@ class User{
 
     // Sort functionality
     this.transactionSort()
+
+    // Log user out
+    this.logout();
   }
 
   userLogin(){
@@ -285,6 +288,20 @@ class User{
       //appendMovement(currentUser.movements, !sorted);
       sorted = !sorted;
     });
+  }
+
+  logout(){
+    btnLogOut.addEventListener('click',()=>{
+
+
+      containerApp.style.opacity = 0;
+      btnLogOut.classList.add('hidden');
+      btnLoginOpenModal.classList.remove('hidden');
+      btnSignupOpenModal.classList.remove('hidden');
+
+      let userToLogOut =  accounts.findIndex(user => user.owner === currentUser.owner);
+      accounts.splice(userToLogOut,1);
+    })
   }
 }
 const user = new User
