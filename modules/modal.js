@@ -13,7 +13,7 @@ const passwordField = document.querySelector('.password');
 
 const btnRegister = document.querySelector('.register_form');
 
-export class Modal{
+class Modal{
   
     constructor(btnSignupOpenModal,btnLoginOpenModal){
 
@@ -105,4 +105,4 @@ class Register{
 }
 
 const signUp = new Register;
-export {signUp}
+export {Modal,signUp}
