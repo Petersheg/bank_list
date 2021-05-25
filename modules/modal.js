@@ -11,7 +11,7 @@ const bvnField = document.querySelector('.bvn');
 const amountField = document.querySelector('.amount');
 const passwordField = document.querySelector('.password');
 
-const btnRegister = document.querySelector('.register_form') 
+const btnRegister = document.querySelector('.register_form');
 
 export class Modal{
   
@@ -51,10 +51,8 @@ export class Modal{
       })
     }
 }
-
-let accounts = JSON.parse(localStorage.getItem('Users')) || [];
 class Register{
-  
+  #accounts = JSON.parse(localStorage.getItem('Users')) || [];
   #user
   constructor(){
     btnRegister.addEventListener('submit', this._register.bind(this) );
@@ -99,10 +97,10 @@ class Register{
 
   setItem(){
     // Push the object into an array
-    accounts.push(this.#user);
+    this.#accounts.push(this.#user);
 
     // Store the data inside local storage  
-    localStorage.setItem('Users', JSON.stringify(accounts));
+    localStorage.setItem('Users', JSON.stringify(this.#accounts));
   }
 }
 
