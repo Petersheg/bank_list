@@ -52,11 +52,12 @@ export class Modal{
     }
 }
 
-let accounts = [];
+let accounts = JSON.parse(localStorage.getItem('Users')) || [];
 class Register{
+  
   #user
   constructor(){
-    this._register();
+    btnRegister.addEventListener('submit', this._register.bind(this) );
   }
 
   // Calculate Interest rate 
@@ -66,10 +67,9 @@ class Register{
     return newrate
   }
 
-  _register(){
+  _register(e){
 
-    btnRegister.addEventListener('submit',(e)=>{
-      e.preventDefault();
+    e.preventDefault();
       // Get the value fo all input fields
       let fullName = fullNameField.value;
       let mobile = mobileField.value;
@@ -78,7 +78,7 @@ class Register{
       let password = passwordField.value;
 
       let interest = this._calInterest();
-
+      console.log(this);
       // create an object base on the values 
       this.#user = {
         owner : fullName,
@@ -95,7 +95,6 @@ class Register{
       // Clear input fields
       fullNameField.value = mobileField.value =
       bvnField.value = amountField.value = passwordField.value = "";
-    })
   }
 
   setItem(){
@@ -104,10 +103,6 @@ class Register{
 
     // Store the data inside local storage  
     localStorage.setItem('Users', JSON.stringify(accounts));
-
-    if(localStorage.getItem('Users')){
-      localStorage.setItem('Users', JSON.stringify(accounts));
-    }
   }
 }
 
