@@ -52,7 +52,7 @@ export class Modal{
     }
 }
 class Register{
-  #accounts = JSON.parse(localStorage.getItem('Users')) || [];
+  accounts = JSON.parse(localStorage.getItem('Users')) || [];
   #user
   constructor(){
     btnRegister.addEventListener('submit', this._register.bind(this) );
@@ -97,11 +97,12 @@ class Register{
 
   setItem(){
     // Push the object into an array
-    this.#accounts.push(this.#user);
+    this.accounts.push(this.#user);
 
     // Store the data inside local storage  
-    localStorage.setItem('Users', JSON.stringify(this.#accounts));
+    localStorage.setItem('Users', JSON.stringify(this.accounts));
   }
 }
 
 const signUp = new Register;
+export {signUp}

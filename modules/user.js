@@ -2,13 +2,13 @@
 /*This Class will handle everything functionality perform by the user
 eg user login, Transfer, Loan and closing account or sorting their transaction*/ 
 
-const {Modal} =await import('./modal.js');
+const {Modal,signUp} =await import('./modal.js');
 const {Account} = await import('./account.js');
 
 // Data
 const registeredUsers = JSON.parse(localStorage.getItem('Users'));
 const [account1,account2] = registeredUsers
-console.log(registeredUsers);
+console.log(signUp.accounts);
 
 // const account1 = {
 //   owner: 'Peter Oluwase',
@@ -22,20 +22,6 @@ console.log(registeredUsers);
 //   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
 //   interestRate: 1.5,
 //   pin: 2222,
-// };
-
-// const account3 = {
-//   owner: 'Adekunle Kolapo',
-//   movements: [200, -200, 340, -300, -20, 50, 400, -460],
-//   interestRate: 0.7,
-//   pin: 3333,
-// };
-
-// const account4 = {
-//   owner: 'Sarah Smith',
-//   movements: [430, 1000, 700, 50, 90],
-//   interestRate: 1,
-//   pin: 4444,
 // };
 
 const accounts = [account1, account2];
