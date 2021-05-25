@@ -82,7 +82,7 @@ class Register{
         owner : fullName,
         movements:[amount],
         interestRate : interest,
-        password,
+        pin: password,
         
         mobile,
         bvn,

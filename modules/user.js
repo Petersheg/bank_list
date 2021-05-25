@@ -6,36 +6,40 @@ const {Modal} =await import('./modal.js');
 const {Account} = await import('./account.js');
 
 // Data
-const account1 = {
-  owner: 'Peter Oluwase',
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-  interestRate: 1.2, // %
-  pin: 1111,
-};
+const registeredUsers = JSON.parse(localStorage.getItem('Users'));
+const [account1,account2] = registeredUsers
+console.log(registeredUsers);
 
-const account2 = {
-  owner: 'Olawotin Joshua',
-  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-  interestRate: 1.5,
-  pin: 2222,
-};
+// const account1 = {
+//   owner: 'Peter Oluwase',
+//   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+//   interestRate: 1.2, // %
+//   pin: 1111,
+// };
 
-const account3 = {
-  owner: 'Adekunle Kolapo',
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
-  interestRate: 0.7,
-  pin: 3333,
-};
+// const account2 = {
+//   owner: 'Olawotin Joshua',
+//   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+//   interestRate: 1.5,
+//   pin: 2222,
+// };
 
-const account4 = {
-  owner: 'Sarah Smith',
-  movements: [430, 1000, 700, 50, 90],
-  interestRate: 1,
-  pin: 4444,
-};
+// const account3 = {
+//   owner: 'Adekunle Kolapo',
+//   movements: [200, -200, 340, -300, -20, 50, 400, -460],
+//   interestRate: 0.7,
+//   pin: 3333,
+// };
 
-const accounts = [account1, account2, account3, account4];
+// const account4 = {
+//   owner: 'Sarah Smith',
+//   movements: [430, 1000, 700, 50, 90],
+//   interestRate: 1,
+//   pin: 4444,
+// };
 
+const accounts = [account1, account2];
+console.log(account1);
 // Instantiate all classes
 const newAccount = new Account;
 newAccount.createUserName(accounts);
@@ -95,7 +99,7 @@ class Auser{
       btnLogin.addEventListener('click',(e)=>{
         e.preventDefault();
         currentUser = this.accounts.find(acc => acc.userName === inputLoginUsername.value);
-        console.log(currentUser);
+        console.log(currentUser.pin);
         
         const disPlayLogoutBtn = function(){
           btnLoginOpenModal.classList.add('hidden');
@@ -103,8 +107,8 @@ class Auser{
           btnLogOut.classList.remove('hidden');
         }
   
-        if(currentUser?.pin === Number(inputLoginPin.value)){
-      
+        if(currentUser?.pin === inputLoginPin.value){
+          
           // Make UI visible
           containerApp.style.opacity = 1;
           // Display welome message
@@ -128,7 +132,7 @@ class Auser{
     userTransfer(){
       btnTransfer.addEventListener('click',(e)=>{
         e.preventDefault();
-        let transferAmount = inputTransferAmount.value;
+        let transferAmount = Number(inputTransferAmount.value);
         let receiverAcc = inputTransferTo.value;
       
         let receiverDetail = this.accounts.find(acc => acc.userName === receiverAcc);
