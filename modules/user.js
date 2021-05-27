@@ -2,30 +2,18 @@
 /*This Class will handle everything functionality perform by the user
 eg user login, Transfer, Loan and closing account or sorting their transaction*/ 
 
-const {Modal,signUp} =await import('./modal.js');
+const {Modal,signUp} = await import('./modal.js');
 const {Account} = await import('./account.js');
 
 // Data
-const registeredUsers = JSON.parse(localStorage.getItem('Users'));
-const [account1,account2] = registeredUsers
-console.log(signUp.accounts);
+// Check if there is any registered user.
+let registeredUsers;
+if(signUp?.accounts){
+  registeredUsers = JSON.parse(localStorage.getItem('Users')) || [];
+};
 
-// const account1 = {
-//   owner: 'Peter Oluwase',
-//   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-//   interestRate: 1.2, // %
-//   pin: 1111,
-// };
+const accounts = [...registeredUsers];
 
-// const account2 = {
-//   owner: 'Olawotin Joshua',
-//   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-//   interestRate: 1.5,
-//   pin: 2222,
-// };
-
-const accounts = [account1, account2];
-console.log(account1);
 // Instantiate all classes
 const newAccount = new Account;
 newAccount.createUserName(accounts);
@@ -59,8 +47,12 @@ const containerApp = document.querySelector('.app');
 let currentUser, sorted = false;
 
 class Auser{
+  // Get registered users from local storage.
+  #userFromLS = JSON.parse(localStorage.getItem('Users')) || [];
 
     constructor(accounts){
+
+    // Initiate all method 
       this.accounts = accounts;
       // Login Functionality
       this.userLogin();
@@ -85,7 +77,6 @@ class Auser{
       btnLogin.addEventListener('click',(e)=>{
         e.preventDefault();
         currentUser = this.accounts.find(acc => acc.userName === inputLoginUsername.value);
-        console.log(currentUser.pin);
         
         const disPlayLogoutBtn = function(){
           btnLoginOpenModal.classList.add('hidden');
@@ -111,6 +102,8 @@ class Auser{
           disPlayLogoutBtn();
           // update UI
           newAccount.updateUI(currentUser);
+        }else{
+          // Sweet Alart here.
         }
       });
     }
@@ -121,18 +114,31 @@ class Auser{
         let transferAmount = Number(inputTransferAmount.value);
         let receiverAcc = inputTransferTo.value;
       
-        let receiverDetail = this.accounts.find(acc => acc.userName === receiverAcc);
+        //let receiverDetail = this.accounts.find(acc => acc.userName === receiverAcc);
+        let receiverDetail = this.#userFromLS.find(acc => acc.owner === receiverAcc);
       
         // check if currentUser have enough money and if the receiver acc exist and if the transferAmount is possitive
         let transferCondition = currentUser.balance >= transferAmount && 
-              receiverAcc && receiverAcc !== currentUser.userName && transferAmount > 0;
+              receiverAcc && receiverAcc !== currentUser.owner && transferAmount > 0;
         
         if(transferCondition){
+
+          this.#userFromLS.forEach(user =>{
+            if(user.owner === currentUser.owner){
+              user.movements.push(-transferAmount);
+              
+              receiverDetail.movements.push(transferAmount);
+            }
+          });
+
           currentUser.movements.push(-transferAmount);
-          receiverDetail.movements.push(transferAmount);
+
+          localStorage.setItem('Users',JSON.stringify(this.#userFromLS));
       
           // update UI
           newAccount.updateUI(currentUser);
+        }else{
+          // Sweet Alert here
         }
          
         // clearField
@@ -146,6 +152,16 @@ class Auser{
         e.preventDefault();
         const loanAmount = Number(inputLoanAmount.value);
         if(loanAmount > 0 && currentUser.movements.some(mov => mov >= loanAmount * 0.1)){
+          console.log(this.#userFromLS);
+
+          this.#userFromLS.forEach(element => {
+            if(element.owner === currentUser.owner){
+              element.movements.push(loanAmount)
+            }
+          });
+
+          localStorage.setItem('Users', JSON.stringify(this.#userFromLS));
+
           // Push requested amount to movement
           currentUser.movements.push(loanAmount);
           // Update UI
@@ -171,6 +187,8 @@ class Auser{
           this.accounts.splice(index,1);
           // Remove UI
           containerApp.style.opacity = 0;
+        }else{
+          // Sweet Alart here
         }
         //console.log('Deleted');
       });

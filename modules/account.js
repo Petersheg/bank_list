@@ -11,6 +11,7 @@ const labelSumInterest = document.querySelector('.summary__value--interest');
 const labelTimer = document.querySelector('.timer');
 
 const containerMovements = document.querySelector('.movements');
+const {signUp} = await import('./modal.js')
 
 class Account{
 
@@ -51,7 +52,6 @@ class Account{
         .toLowerCase()
         allUsers.push(acc);
       });
-      console.log(allUsers);
     };
   
     balance(acc){
