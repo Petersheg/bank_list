@@ -4,6 +4,7 @@ eg user login, Transfer, Loan and closing account or sorting their transaction*/
 
 const {Modal,signUp} = await import('./modal.js');
 const {Account} = await import('./account.js');
+const Swal = await import('../sweetalert.js');
 
 // Data
 // Check if there is any registered user.
@@ -104,6 +105,12 @@ class Auser{
           newAccount.updateUI(currentUser);
         }else{
           // Sweet Alart here.
+          Swal.fire({
+            title: 'Error!',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Cool'
+          })
         }
       });
     }
