@@ -43,16 +43,16 @@ class Account{
       });
     }
   
-    createUserName(accs) {
-      let allUsers = [];
-      accs.forEach(acc=>{
-        acc.userName = acc.owner.split(' ')
-        .map(val=> val[0])
-        .join('')
-        .toLowerCase()
-        allUsers.push(acc);
-      });
-    };
+    // createUserName(accs) {
+    //   let allUsers = [];
+    //   accs.forEach(acc=>{
+    //     acc.userName = acc.owner.split(' ')
+    //     .map(val=> val[0])
+    //     .join('')
+    //     .toLowerCase()
+    //     allUsers.push(acc);
+    //   });
+    // };
   
     balance(acc){
       acc.balance = acc.movements.reduce((acc,cur)=>{

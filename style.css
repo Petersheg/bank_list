@@ -49,6 +49,11 @@ nav {
   font-weight: 500;
 }
 
+.user_span,.bvn_span{
+  color: #4bbb7d;
+  font-size: 2rem;
+}
+
 .logo {
   height: 5.25rem;
 }

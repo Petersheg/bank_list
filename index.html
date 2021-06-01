@@ -12,8 +12,8 @@
     />
 
     <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
-    <script src="./sweetalert.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="./sweetalert.js"></script>
     <script type="module" src="script.js"></script>
 
     <title>Bankist</title>
@@ -21,7 +21,8 @@
   <body>
     <!-- TOP NAVIGATION -->
     <nav>
-      <p class="welcome">Log in to get started</p>
+      <p class="welcome">Log in to get started <span class="user_span"></span></p>
+      <p class="welcome hidden bvn_label">BVN Number Here <span class="bvn_span"></span></p>
       <img src="logo.png" alt="Logo" class="logo" />
       <button class="btn open_signup-modal">Sign Up</button>
       <button class="btn open_login-modal">Login</button>
@@ -122,12 +123,12 @@
       <form class=" register_form modal__form">
         <label>Full Name</label>
         <input type="text" class="fullname"/>
+        <label>User Name</label>
+        <input type="text" class="user_name"/>
         <label>Mobile</label>
-        <input type="phone" class="mobile"/>
-        <label>BVN</label>
-        <input type="phone" class="bvn"/>
+        <input type="tel" class="mobile"/>
         <label>Starting Amount</label>
-        <input type="phone" class="amount"/>
+        <input type="number" class="amount"/>
         <label>Password</label>
         <input type="text" class="password"/>
         <button class="btn  register_button">Register</button>

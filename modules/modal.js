@@ -4,10 +4,14 @@ const overlay = document.querySelector('.overlay');
 const loginCloseModal = document.querySelector('.login_btn--close-modal');
 const signupCloseModal = document.querySelector('.signup_btn--close-modal');
 
+//BTNs
+const btnLoginOpenModal = document.querySelector('.open_login-modal');
+const btnSignupOpenModal = document.querySelector('.open_signup-modal');
+
 // input fields
 const fullNameField = document.querySelector('.fullname');
 const mobileField = document.querySelector('.mobile');
-const bvnField = document.querySelector('.bvn');
+const userNameField = document.querySelector('.user_name');
 const amountField = document.querySelector('.amount');
 const passwordField = document.querySelector('.password');
 
@@ -15,7 +19,7 @@ const btnRegister = document.querySelector('.register_form');
 
 class Modal{
   
-    constructor(btnSignupOpenModal,btnLoginOpenModal){
+    constructor(btnSignupOpenModal ,btnLoginOpenModal){
 
       this.btnSignupOpenModal = btnSignupOpenModal;
       this.btnLoginOpenModal = btnLoginOpenModal;
@@ -25,11 +29,14 @@ class Modal{
       this._closeModal(loginCloseModal,loginModal);
       this._closeModal(signupCloseModal,signupModal);
     }
-  
-    _openModal(btn,modal){
+    
+    showModal(modal = loginModal){
+      modal.classList.remove('hidden');
+      overlay.classList.remove('hidden');
+    }
+    _openModal(btn = btnLoginOpenModal,modal){
       btn.addEventListener('click', ()=>{
-        modal.classList.remove('hidden');
-        overlay.classList.remove('hidden');
+        this.showModal(modal);
       })
     }
   
@@ -51,48 +58,87 @@ class Modal{
       })
     }
 }
+
+const modal = new Modal(btnSignupOpenModal,btnLoginOpenModal);
+
+//const {Auser} = await import('./user.js');
+//const Swal = await import('../sweetalert.js');
 class Register{
   accounts = JSON.parse(localStorage.getItem('Users')) || [];
   #user
   constructor(){
-    btnRegister.addEventListener('submit', this._register.bind(this) );
+    btnRegister.addEventListener('submit', this._register.bind(this));
+    this._generateBVN();
   }
 
   // Calculate Interest rate 
-  _calInterest(){
+  _calcInterest(){
     let intRate = Date.now();
     let newrate = Number(intRate.toString().split('').slice(11,14).join(''))/10
     return newrate
   }
 
-  _register(e){
+  _generateBVN(){
+    let newDate = Date.now();
+    let newBVN = Number(newDate.toString().split('').slice(3,14).join(''))
+    return newBVN;
+  }
 
+  _register(e){
     e.preventDefault();
       // Get the value fo all input fields
       let fullName = fullNameField.value;
       let mobile = mobileField.value;
-      let bvn = bvnField.value; 
+      let userName = userNameField.value;
       let amount = Number(amountField.value)//Value Converted to number;
       let password = passwordField.value;
 
-      let interest = this._calInterest();
-      console.log(this);
-      // create an object base on the values 
-      this.#user = {
-        owner : fullName,
-        movements:[amount],
-        interestRate : interest,
-        pin: password,
-        
-        mobile,
-        bvn,
-      }
-      console.log(this.#user);
+      let interest = this._calcInterest();
+      const required = fullName !== '' && 
+      mobile !== '' && userName !== '' && amount !== '' && password !== '';
+      console.log(required);
 
-      this.setItem()
-      // Clear input fields
-      fullNameField.value = mobileField.value =
-      bvnField.value = amountField.value = passwordField.value = "";
+      if(required){
+          // create an object base on the values 
+        this.#user = {
+          owner : fullName,
+          movements:[amount],
+          interestRate : interest,
+          pin: password,
+          bvn: this._generateBVN(),
+          
+          userName,
+          mobile,
+        }
+
+        this.setItem()
+        // Clear input fields
+        fullNameField.value = mobileField.value =
+        userNameField.value = amountField.value = passwordField.value = "";
+
+        modal.hideModal(signupModal);
+
+        // After Successful Registration, Load Login Modal Automatically.
+        new swal({
+          title: "Success",
+          text: "Registration Successful, Kindly Login",
+          icon: "success",
+        }).then((fulfilled)=>{
+          if(fulfilled){
+            // Load Login Modal
+            modal.showModal();
+          }
+        })
+
+      }else{
+        // Sweet Alart here.
+        new swal({
+          title:"Error",
+          text: 'All fields are require',
+          icon : 'error'
+        })
+      }
+      
   }
 
   setItem(){
@@ -103,6 +149,5 @@ class Register{
     localStorage.setItem('Users', JSON.stringify(this.accounts));
   }
 }
-
 const signUp = new Register;
 export {Modal,signUp}

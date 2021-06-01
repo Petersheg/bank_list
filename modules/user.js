@@ -17,9 +17,7 @@ const accounts = [...registeredUsers];
 
 // Instantiate all classes
 const newAccount = new Account;
-newAccount.createUserName(accounts);
 
-console.log(newAccount);
 //export const test = 'Just testing';
 const btnLogin = document.querySelector('.login__btn');
 const btnTransfer = document.querySelector('.form__btn--transfer');
@@ -39,6 +37,7 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 const labelWelcome = document.querySelector('.welcome');
+const labelBVN = document.querySelector('.bvn_label');
 const labelDate = document.querySelector('.date');
 const containerApp = document.querySelector('.app');
 
@@ -73,25 +72,36 @@ class Auser{
       // Log user out
       this.logout();
     }
+
+    findUserName(){
+      return this.#userFromLS.map(acc=> acc.userName);
+    }
   
     userLogin(){
       btnLogin.addEventListener('click',(e)=>{
         e.preventDefault();
-        currentUser = this.accounts.find(acc => acc.userName === inputLoginUsername.value);
-        
+        // Look up for current user!
+        currentUser = this.#userFromLS.find(acc => acc.userName === inputLoginUsername.value) || [];
+
+        // method to display Logout button after user login
         const disPlayLogoutBtn = function(){
           btnLoginOpenModal.classList.add('hidden');
           btnSignupOpenModal.classList.add('hidden');
           btnLogOut.classList.remove('hidden');
         }
-  
-        if(currentUser?.pin === inputLoginPin.value){
+        
+        // Log User in if creadebtials are correct! else dispalay error message.
+        if(currentUser?.pin === inputLoginPin.value && currentUser.userName == inputLoginUsername.value){
           
           // Make UI visible
           containerApp.style.opacity = 1;
           // Display welome message
-          let fName = currentUser.owner.split(' ')[0]
-          labelWelcome.textContent=`Welcome here ${fName}`;
+          // let fName = currentUser.owner.split(' ')[0]
+          labelWelcome.textContent=`Welcome here ${currentUser.owner}`;
+          labelWelcome.classList.add('highlight');
+          // Setting User BVN
+          labelBVN.textContent = `BVN : ${currentUser.bvn}`;
+          labelBVN.classList.remove('hidden');
       
           // Clear input field and let it loose focus
             inputLoginUsername.value = "";
@@ -105,12 +115,7 @@ class Auser{
           newAccount.updateUI(currentUser);
         }else{
           // Sweet Alart here.
-          Swal.fire({
-            title: 'Error!',
-            text: 'Do you want to continue',
-            icon: 'error',
-            confirmButtonText: 'Cool'
-          })
+          new swal('Warning','Wrong Log in details','error');
         }
       });
     }
@@ -128,7 +133,7 @@ class Auser{
         let transferCondition = currentUser.balance >= transferAmount && 
               receiverAcc && receiverAcc !== currentUser.owner && transferAmount > 0;
         
-        if(transferCondition){
+        if(transferCondition && receiverDetail){
 
           this.#userFromLS.forEach(user =>{
             if(user.owner === currentUser.owner){
@@ -146,6 +151,7 @@ class Auser{
           newAccount.updateUI(currentUser);
         }else{
           // Sweet Alert here
+          new swal('Warning','Wrong Receiver info.','error');
         }
          
         // clearField
@@ -159,7 +165,6 @@ class Auser{
         e.preventDefault();
         const loanAmount = Number(inputLoanAmount.value);
         if(loanAmount > 0 && currentUser.movements.some(mov => mov >= loanAmount * 0.1)){
-          console.log(this.#userFromLS);
 
           this.#userFromLS.forEach(element => {
             if(element.owner === currentUser.owner){
@@ -175,6 +180,8 @@ class Auser{
           newAccount.updateUI(currentUser);
           // clear field
           inputLoanAmount.value = "";
+        }else{
+          new swal('Warning','Wrong Input','error');
         }
       })
     }
@@ -183,21 +190,26 @@ class Auser{
       btnClose.addEventListener('click',(e)=>{
         e.preventDefault();
         let closeUser = inputCloseUsername.value;
-        let closePin = Number(inputClosePin.value);
-        console.log(closeUser,closePin);
-        if(closeUser === currentUser.userName && closePin === currentUser.pin){
-          // Delete currentUser from accounts array;
-          
-          // get currentUser Index
-          const index = this.accounts.findIndex(acc => acc.userName === currentUser.userName);
-          // Remove it from the accounts array;
-          this.accounts.splice(index,1);
-          // Remove UI
+        let closePin = inputClosePin.value;
+
+        if(closeUser === currentUser.owner && closePin === currentUser.pin){
+          // Delete currentUser from Local storage;
+
+          // LookUp user from Local Storage
+          const index = this.#userFromLS.findIndex(acc => acc.owner === currentUser.owner);
+          // Delete user from array.
+          this.#userFromLS.splice(index,1);
+          // Set Local storage with remaining users.
+          localStorage.setItem('Users',JSON.stringify(this.#userFromLS));
+          // Reload page.
+          location.reload();
+          // Remove UI.
           containerApp.style.opacity = 0;
+
         }else{
           // Sweet Alart here
+          new swal('Warning','Wrong details','error');
         }
-        //console.log('Deleted');
       });
     }
   
@@ -213,14 +225,13 @@ class Auser{
     logout(){
       btnLogOut.addEventListener('click',()=>{
   
-  
         containerApp.style.opacity = 0;
         btnLogOut.classList.add('hidden');
         btnLoginOpenModal.classList.remove('hidden');
         btnSignupOpenModal.classList.remove('hidden');
-  
-        let userToLogOut =  this.accounts.findIndex(user => user.owner === currentUser.owner);
-        this.accounts.splice(userToLogOut,1);
+
+        // reload the page
+        location.reload();
       })
     }
 }
