@@ -72,10 +72,6 @@ class Auser{
       // Log user out
       this.logout();
     }
-
-    findUserName(){
-      return this.#userFromLS.map(acc=> acc.userName);
-    }
   
     userLogin(){
       btnLogin.addEventListener('click',(e)=>{
@@ -127,7 +123,7 @@ class Auser{
         let receiverAcc = inputTransferTo.value;
       
         //let receiverDetail = this.accounts.find(acc => acc.userName === receiverAcc);
-        let receiverDetail = this.#userFromLS.find(acc => acc.owner === receiverAcc);
+        let receiverDetail = this.#userFromLS.find(acc => acc.userName === receiverAcc || acc.bvn === receiverAcc);
       
         // check if currentUser have enough money and if the receiver acc exist and if the transferAmount is possitive
         let transferCondition = currentUser.balance >= transferAmount && 

@@ -1,3 +1,4 @@
+
 const loginModal = document.querySelector('.login_modal');
 const signupModal = document.querySelector('.signup_modal');
 const overlay = document.querySelector('.overlay');
@@ -61,7 +62,6 @@ class Modal{
 
 const modal = new Modal(btnSignupOpenModal,btnLoginOpenModal);
 
-//const {Auser} = await import('./user.js');
 //const Swal = await import('../sweetalert.js');
 class Register{
   accounts = JSON.parse(localStorage.getItem('Users')) || [];
@@ -96,9 +96,10 @@ class Register{
       let interest = this._calcInterest();
       const required = fullName !== '' && 
       mobile !== '' && userName !== '' && amount !== '' && password !== '';
-      console.log(required);
 
-      if(required){
+      const authUser = ()=>{
+        if(required){
+          console.log(this);
           // create an object base on the values 
         this.#user = {
           owner : fullName,
@@ -111,7 +112,7 @@ class Register{
           mobile,
         }
 
-        this.setItem()
+        //this.setItem()
         // Clear input fields
         fullNameField.value = mobileField.value =
         userNameField.value = amountField.value = passwordField.value = "";
@@ -125,8 +126,8 @@ class Register{
           icon: "success",
         }).then((fulfilled)=>{
           if(fulfilled){
-            // Load Login Modal
-            modal.showModal();
+            // Reload Page for login to take effect.
+            location.reload();
           }
         })
 
@@ -138,6 +139,25 @@ class Register{
           icon : 'error'
         })
       }
+      }
+
+      // Check if User Already exist
+      this.accounts
+      .map(acc=> acc.userName)
+      .forEach(userName =>{
+       
+        if(userNameField.value === userName){
+          // if yes Alart Error
+          new swal({
+            title: "Error",
+            text: "Username Alredy exist!",
+            icon: 'error'
+          })
+        }else{
+          // Else Authenticate User.
+          authUser()
+        }
+      })
       
   }
 
