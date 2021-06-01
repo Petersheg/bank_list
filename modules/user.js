@@ -163,14 +163,11 @@ class Auser{
 
           this.#userFromLS.forEach(element => {
             if(element.owner === currentUser.owner){
-              element.movements.push(loanAmount)
+              element.movements.push(loanAmount);
             }
           });
 
           localStorage.setItem('Users', JSON.stringify(this.#userFromLS));
-
-          // Push requested amount to movement
-          currentUser.movements.push(loanAmount);
           // Update UI
           newAccount.updateUI(currentUser);
           // clear field

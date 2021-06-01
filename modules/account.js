@@ -74,7 +74,7 @@ class Account{
                       .map(int => (int * acct.interestRate)/100)
                       .filter(int => int >= 1)
                       .reduce((acc,cur)=> acc+cur,0);
-                      labelSumInterest.textContent = `${interest}€`;
+                      labelSumInterest.textContent = `${interest.toFixed(1)}€`;
     }
     // Update Ui
     updateUI(user){
