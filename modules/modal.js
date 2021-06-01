@@ -112,7 +112,7 @@ class Register{
           mobile,
         }
 
-        //this.setItem()
+        this.setItem()
         // Clear input fields
         fullNameField.value = mobileField.value =
         userNameField.value = amountField.value = passwordField.value = "";
