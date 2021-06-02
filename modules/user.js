@@ -38,7 +38,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 const labelWelcome = document.querySelector('.welcome');
 const labelBVN = document.querySelector('.bvn_label');
-const labelDate = document.querySelector('.date');
 const containerApp = document.querySelector('.app');
 
 // CREATE INSTANCE OF CLASS
@@ -51,8 +50,8 @@ class Auser{
   #userFromLS = JSON.parse(localStorage.getItem('Users')) || [];
 
     constructor(accounts){
-
-    // Initiate all method 
+      
+      // Initiate all method 
       this.accounts = accounts;
       // Login Functionality
       this.userLogin();

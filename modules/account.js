@@ -9,11 +9,16 @@ const labelSumIn = document.querySelector('.summary__value--in');
 const labelSumOut = document.querySelector('.summary__value--out');
 const labelSumInterest = document.querySelector('.summary__value--interest');
 const labelTimer = document.querySelector('.timer');
+const labelDate = document.querySelector('.date');
 
 const containerMovements = document.querySelector('.movements');
 const {signUp} = await import('./modal.js')
 
 class Account{
+
+  constructor(){
+    this.calcDate();
+  }
 
     appendMovement(movements,sorted= false){
       containerMovements.innerHTML = '';
@@ -88,6 +93,16 @@ class Account{
   
       // Calculate user Summary
       this.calcSumary(user);
+    }
+
+    calcDate(){
+      const date = new Date();
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year  = date.getFullYear();
+      
+      let todayDate = `${day}/${month}/${year}`
+      labelDate.textContent = todayDate;
     }
   }
 
