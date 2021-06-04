@@ -16,7 +16,7 @@ const userNameField = document.querySelector('.user_name');
 const amountField = document.querySelector('.amount');
 const passwordField = document.querySelector('.password');
 
-const btnRegister = document.querySelector('.register_form');
+const btnRegister = document.querySelector('.register_button');//'.register_form'
 
 class Modal{
   
@@ -65,10 +65,11 @@ const modal = new Modal(btnSignupOpenModal,btnLoginOpenModal);
 //const Swal = await import('../sweetalert.js');
 class Register{
   accounts = JSON.parse(localStorage.getItem('Users')) || [];
-  #user
+  #user;
   constructor(){
-    btnRegister.addEventListener('submit', this._register.bind(this));
+    //btnRegister.addEventListener('click', this._register.bind(this));
     this._generateBVN();
+    this._register();
   }
 
   // Calculate Interest rate 
@@ -84,8 +85,10 @@ class Register{
     return newBVN;
   }
 
-  _register(e){
-    e.preventDefault();
+  _register(){
+    console.log(this.accounts.length);
+    btnRegister.addEventListener('click', (e)=>{
+      e.preventDefault();
       // Get the value fo all input fields
       let fullName = fullNameField.value;
       let mobile = mobileField.value;
@@ -98,67 +101,70 @@ class Register{
       mobile !== '' && userName !== '' && amount !== '' && password !== '';
 
       const authUser = ()=>{
-        if(required){
-          console.log(this);
-          // create an object base on the values 
-        this.#user = {
-          owner : fullName,
-          movements:[amount],
-          interestRate : interest,
-          pin: password,
-          bvn: this._generateBVN(),
-          
-          userName,
-          mobile,
-        }
-
-        this.setItem()
-        // Clear input fields
-        fullNameField.value = mobileField.value =
-        userNameField.value = amountField.value = passwordField.value = "";
-
-        modal.hideModal(signupModal);
-
-        // After Successful Registration, Load Login Modal Automatically.
-        new swal({
-          title: "Success",
-          text: "Registration Successful, Kindly Login",
-          icon: "success",
-        }).then((fulfilled)=>{
-          if(fulfilled){
-            // Reload Page for login to take effect.
-            location.reload();
+           // create an object base on the values 
+           this.#user = {
+            owner : fullName,
+            movements:[amount],
+            interestRate : interest,
+            pin: password,
+            bvn: this._generateBVN(),
+            
+            userName,
+            mobile,
           }
-        })
-
-      }else{
-        // Sweet Alart here.
-        new swal({
-          title:"Error",
-          text: 'All fields are require',
-          icon : 'error'
-        })
-      }
-      }
-
-      // Check if User Already exist
-      this.accounts
-      .map(acc=> acc.userName)
-      .forEach(userName =>{
-       
-        if(userNameField.value === userName){
-          // if yes Alart Error
+  
+          this.setItem()
+          // Clear input fields
+          fullNameField.value = mobileField.value =
+          userNameField.value = amountField.value = passwordField.value = "";
+  
+          modal.hideModal(signupModal);
+  
+          // After Successful Registration, Load Login Modal Automatically.
           new swal({
-            title: "Error",
-            text: "Username Alredy exist!",
-            icon: 'error'
+            title: "Success",
+            text: "Registration Successful, Kindly Login",
+            icon: "success",
+          }).then((fulfilled)=>{
+            if(fulfilled){
+              // Reload Page for login to take effect.
+              location.reload();
+            }
           })
-        }else{
-          // Else Authenticate User.
+      }
+
+      let userNameExist;
+
+      // If there is registered user if yes then check if userName user try to register does not exist.
+      if(this.accounts.length > 0){
+        userNameExist = 
+        this.accounts
+        .map(acc => acc.userName)
+        .some(user => userNameField.value === user)
+      }
+     
+      if(userNameExist){
+        // if yes Alart Error
+        new swal({
+          title: "Error",
+          text: "Username Alredy exist!",
+          icon: 'error'
+        })
+      }else{
+        // Check if no user at all or all field are filled
+        if(this.accounts.length <= 0 || required ){
           authUser()
+        }else{
+          // Sweet Alart here.
+          new swal({
+            title:"Error",
+            text: 'All fields are require',
+            icon : 'error'
+          })
         }
-      })
-      
+      }
+
+    })
   }
 
   setItem(){
