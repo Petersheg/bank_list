@@ -152,7 +152,7 @@ class Register{
         })
       }else{
         // Check if no user at all or all field are filled
-        if(this.accounts.length <= 0 || required ){
+        if(this.accounts.length <= 0 && required || required){
           authUser()
         }else{
           // Sweet Alart here.
