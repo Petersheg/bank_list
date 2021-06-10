@@ -8,6 +8,7 @@ const signupCloseModal = document.querySelector('.signup_btn--close-modal');
 //BTNs
 const btnLoginOpenModal = document.querySelector('.open_login-modal');
 const btnSignupOpenModal = document.querySelector('.open_signup-modal');
+const btnRegister = document.querySelector('.register_button');//'.register_form'
 
 // input fields
 const fullNameField = document.querySelector('.fullname');
@@ -16,8 +17,9 @@ const userNameField = document.querySelector('.user_name');
 const amountField = document.querySelector('.amount');
 const passwordField = document.querySelector('.password');
 const bvnField = document.querySelector('.bvn');
+const accountTypeField = document.querySelector('#account_type')
 
-const btnRegister = document.querySelector('.register_button');//'.register_form'
+const labelBVN =document.querySelector('.bvn_labell');
 
 class Modal{
   
@@ -67,6 +69,7 @@ const modal = new Modal(btnSignupOpenModal,btnLoginOpenModal);
 class Register{
   accounts = JSON.parse(localStorage.getItem('Users')) || [];
   #user;
+  #accType;
   constructor(){
     //btnRegister.addEventListener('click', this._register.bind(this));
     this._generateBVN();
@@ -86,24 +89,46 @@ class Register{
     return newBVN;
   }
 
+  _generateAccountNumber(){
+    return this._generateBVN() - 1111000000;
+  }
+
   _register(){
     console.log(this.accounts.length);
 
     // Suggest BVN for User
     bvnField.addEventListener('focus',(e)=>{
       e.target.value = this._generateBVN();
-      console.log(e.target.value);
+    })
+
+    accountTypeField.addEventListener('change',(e)=>{
+      let select = e.target.value
+      if(select === 'Tier One'){
+
+        bvnField.value = "";
+        bvnField.style.display = 'none';
+        labelBVN.style.display = 'none';
+      }else{
+        bvnField.style.display = 'block';
+        labelBVN.style.display = 'block';
+      }
+
+      this.#accType = select;
+      console.log(select);
     })
 
     btnRegister.addEventListener('click', (e)=>{
       e.preventDefault();
-      // Get the value fo all input fields
+      // Get the value for all input fields
       let fullName = fullNameField.value;
       let mobile = mobileField.value;
       let userName = userNameField.value;
       let amount = Number(amountField.value)//Value Converted to number;
       let password = passwordField.value;
-      let bvn = bvnField.value;
+      let bvn;
+
+      // Auto generate BVN for Tier One acount
+      this.#accType === 'Tier One' ? bvn = this._generateBVN() : bvn = bvnField.value;
 
       let interest = this._calcInterest();
       const required = fullName !== '' && 
@@ -117,6 +142,8 @@ class Register{
             interestRate : interest,
             pin: password,
             bvn: bvn,
+            accountNumber: this._generateAccountNumber(),
+            accType : this.#accType,
             
             userName,
             mobile,

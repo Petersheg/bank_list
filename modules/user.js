@@ -38,6 +38,8 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 const labelWelcome = document.querySelector('.welcome');
 const labelBVN = document.querySelector('.bvn_label');
+const labelACC = document.querySelector('.acc_label');
+const labelAccType = document.querySelector('.acc-type_label');
 const containerApp = document.querySelector('.app');
 
 // CREATE INSTANCE OF CLASS
@@ -95,8 +97,18 @@ class Auser{
           labelWelcome.textContent=`Welcome here ${currentUser.owner}`;
           labelWelcome.classList.add('highlight');
           // Setting User BVN
-          labelBVN.textContent = `BVN : ${currentUser.bvn}`;
-          labelBVN.classList.remove('hidden');
+          // labelBVN.textContent = `BVN : ${currentUser.bvn}`;
+          // labelBVN.classList.remove('hidden');
+
+          // Setting User ACC
+          labelACC.textContent = ` ACC: ${currentUser.accountNumber}`;
+          labelACC.classList.remove('hidden');
+          labelACC.style.paddingLeft = '15px'
+      
+          // Setting User Account Type
+          labelAccType.textContent = `Type: ${currentUser.accType}`;
+          labelAccType.classList.remove('hidden');
+          labelAccType.style.paddingLeft = '10px'
       
           // Clear input field and let it loose focus
             inputLoginUsername.value = "";
@@ -123,12 +135,11 @@ class Auser{
       
         //let receiverDetail = this.accounts.find(acc => acc.userName === receiverAcc);
         let receiverDetail = this.#userFromLS
-        .find(acc => acc.userName === receiverAcc || String(acc.bvn) === receiverAcc);
+        .find(acc => String(acc.accountNumber) === receiverAcc);
       
         // check if currentUser have enough money and if the receiver acc exist and if the transferAmount is possitive
         let transferCondition = currentUser.balance >= transferAmount && 
-              receiverAcc && receiverAcc !== currentUser.owner &&
-              receiverAcc !== String(currentUser.bvn) && transferAmount > 0;
+              receiverAcc && receiverAcc !== String(currentUser.accountNumber) && transferAmount > 0;
               
             console.log(currentUser.owner);
         if(transferCondition && receiverDetail){

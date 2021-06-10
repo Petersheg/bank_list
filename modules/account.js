@@ -27,7 +27,7 @@ class Account{
       movs.forEach((mov,index) => {
     
         // Create Html element to insert the movements to
-        const type = mov > 0 ? 'deposit' : 'withdrawal';
+        const type = mov > 0 ? 'credit' : 'debit';
     
         // Create all elements with javascript
         const movRow = document.createElement('div');

@@ -173,11 +173,11 @@ nav {
   color: #666;
 }
 
-.movements__type--deposit {
+.movements__type--credit {
   background-image: linear-gradient(to top left, #39b385, #9be15d);
 }
 
-.movements__type--withdrawal {
+.movements__type--debit {
   background-image: linear-gradient(to top left, #e52a5a, #ff585f);
 }
 
@@ -360,7 +360,7 @@ h2 {
   font-weight: 500;
 }
 
-.modal__form input {
+.modal__form input,.select{
   font-size: 1.7rem;
   padding: 1rem 1.5rem;
   border: 1px solid #ddd;
