@@ -12,7 +12,7 @@ const labelTimer = document.querySelector('.timer');
 const labelDate = document.querySelector('.date');
 
 const containerMovements = document.querySelector('.movements');
-const {signUp} = await import('./modal.js')
+//const {signUp} = await import('./modal.js');
 
 class Account{
 

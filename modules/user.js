@@ -127,8 +127,10 @@ class Auser{
       
         // check if currentUser have enough money and if the receiver acc exist and if the transferAmount is possitive
         let transferCondition = currentUser.balance >= transferAmount && 
-              receiverAcc && receiverAcc !== currentUser.owner && transferAmount > 0;
-        
+              receiverAcc && receiverAcc !== currentUser.owner &&
+              receiverAcc !== String(currentUser.bvn) && transferAmount > 0;
+              
+            console.log(currentUser.owner);
         if(transferCondition && receiverDetail){
 
           this.#userFromLS.forEach(user =>{

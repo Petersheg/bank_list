@@ -15,6 +15,7 @@ const mobileField = document.querySelector('.mobile');
 const userNameField = document.querySelector('.user_name');
 const amountField = document.querySelector('.amount');
 const passwordField = document.querySelector('.password');
+const bvnField = document.querySelector('.bvn');
 
 const btnRegister = document.querySelector('.register_button');//'.register_form'
 
@@ -87,6 +88,13 @@ class Register{
 
   _register(){
     console.log(this.accounts.length);
+
+    // Suggest BVN for User
+    bvnField.addEventListener('focus',(e)=>{
+      e.target.value = this._generateBVN();
+      console.log(e.target.value);
+    })
+
     btnRegister.addEventListener('click', (e)=>{
       e.preventDefault();
       // Get the value fo all input fields
@@ -95,6 +103,7 @@ class Register{
       let userName = userNameField.value;
       let amount = Number(amountField.value)//Value Converted to number;
       let password = passwordField.value;
+      let bvn = bvnField.value;
 
       let interest = this._calcInterest();
       const required = fullName !== '' && 
@@ -107,7 +116,7 @@ class Register{
             movements:[amount],
             interestRate : interest,
             pin: password,
-            bvn: this._generateBVN(),
+            bvn: bvn,
             
             userName,
             mobile,
@@ -116,7 +125,7 @@ class Register{
           this.setItem()
           // Clear input fields
           fullNameField.value = mobileField.value =
-          userNameField.value = amountField.value = passwordField.value = "";
+          userNameField.value = amountField.value = passwordField.value = bvnField.value = "";
   
           modal.hideModal(signupModal);
   
