@@ -83,17 +83,17 @@
       </div>
 
       <!-- OPERATION: LOAN -->
-      <div class="operation operation--loan">
+      <!-- <div class="operation operation--loan">
         <h2>Request loan</h2>
         <form class="form form--loan">
           <input type="number" class="form__input form__input--loan-amount" />
           <button class="form__btn form__btn--loan">&rarr;</button>
           <label class="form__label form__label--loan">Amount</label>
         </form>
-      </div>
+      </div> -->
 
       <!-- OPERATION: CLOSE -->
-      <div class="operation operation--close">
+      <!-- <div class="operation operation--close">
         <h2>Close account</h2>
         <form class="form form--close">
           <input type="text" class="form__input form__input--user" />
@@ -106,12 +106,12 @@
           <label class="form__label">Confirm user</label>
           <label class="form__label">Confirm PIN</label>
         </form>
-      </div>
+      </div> -->
 
       <!-- LOGOUT TIMER -->
-      <p class="logout-timer">
+      <!-- <p class="logout-timer">
         You will be logged out in <span class="timer">05:00</span>
-      </p>
+      </p> -->
     </main>
 
     <!--SIGN UP MODAL -->
@@ -129,9 +129,7 @@
         <input type="text" class="user_name"/>
         <label>Mobile</label>
         <input type="tel" class="mobile"/>
-        <label>Starting Amount</label>
-        <input type="number" class="amount"/>
-
+        
         <label>Account Type</label>
         <select name="" id="account_type" class="select"> 
           <option value="select" >Select</option>
@@ -139,6 +137,19 @@
           <option value="Tier Two">Tier 2</option>
           <option value="Tier Three">Tier 3</option>
         </select>
+
+        <span class="display_none id_type-span">
+          <label >Identity Type</label>
+          <input type="text" class="id_type" placeholder="National Passport"/>
+        </span>
+        
+        <span class="display_none id_number-span">
+          <label>Identity Number</label>
+          <input type="number" class="id_number" placeholder="126457678j0099"/>
+        </span>
+
+        <label>Starting Amount</label>
+        <input type="number" class="amount"/>
 
         <label class="bvn_labell">BVN</label>
         <input type="number" class="bvn"/>

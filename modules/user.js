@@ -1,10 +1,12 @@
 
 /*This Class will handle everything functionality perform by the user
-eg user login, Transfer, Loan and closing account or sorting their transaction*/ 
+eg user login, Transfer, Loan and closing account or sorting their transaction*/
 
+ 
 const {Modal,signUp} = await import('./modal.js');
 const {Account} = await import('./account.js');
-const Swal = await import('../sweetalert.js');
+// const Swal = await import('../sweetalert.js');
+import Swal from '../node_modules/sweetalert2/src/sweetalert2.js'
 
 // Data
 // Check if there is any registered user.
@@ -21,8 +23,8 @@ const newAccount = new Account;
 //export const test = 'Just testing';
 const btnLogin = document.querySelector('.login__btn');
 const btnTransfer = document.querySelector('.form__btn--transfer');
-const btnLoan = document.querySelector('.form__btn--loan');
-const btnClose = document.querySelector('.form__btn--close');
+// const btnLoan = document.querySelector('.form__btn--loan');
+// const btnClose = document.querySelector('.form__btn--close');
 const btnSort = document.querySelector('.btn--sort');
 const btnLoginOpenModal = document.querySelector('.open_login-modal');
 const btnSignupOpenModal = document.querySelector('.open_signup-modal');
@@ -32,9 +34,9 @@ const inputLoginUsername = document.querySelector('.login__input--user');
 const inputLoginPin = document.querySelector('.login__input--pin');
 const inputTransferTo = document.querySelector('.form__input--to');
 const inputTransferAmount = document.querySelector('.form__input--amount');
-const inputLoanAmount = document.querySelector('.form__input--loan-amount');
-const inputCloseUsername = document.querySelector('.form__input--user');
-const inputClosePin = document.querySelector('.form__input--pin');
+// const inputLoanAmount = document.querySelector('.form__input--loan-amount');
+// const inputCloseUsername = document.querySelector('.form__input--user');
+// const inputClosePin = document.querySelector('.form__input--pin');
 
 const labelWelcome = document.querySelector('.welcome');
 const labelBVN = document.querySelector('.bvn_label');
@@ -62,11 +64,11 @@ class Auser{
       this.userTransfer();
   
       // Loan Functionality
-      this.userLoan();
+      // this.userLoan();
   
       // Close Account functionality
-      this.closAcc();
-  
+      // this.closAcc();
+
       // Sort functionality
       this.transactionSort()
   
@@ -76,6 +78,7 @@ class Auser{
   
     userLogin(){
       btnLogin.addEventListener('click',(e)=>{
+        
         e.preventDefault();
         // Look up for current user!
         currentUser = this.#userFromLS.find(acc => acc.userName === inputLoginUsername.value) || [];
@@ -122,100 +125,198 @@ class Auser{
           newAccount.updateUI(currentUser);
         }else{
           // Sweet Alart here.
-          new swal('Warning','Wrong Log in details','error');
+          Swal.fire('Warning','Wrong Log in details','error');
         }
       });
     }
-  
+
+    generateOTP(){
+      let otp = Date.now()
+      otp = String(otp).split('').slice(8,13).join('');
+      return otp;
+    }
+    
+    // For SweetAlert Toast
+    toast(icon,msg){
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+      Toast.fire({
+        icon: icon,
+        title: msg,
+      })
+    }
+
+    // Calculate time for each trasaction
+    
+    timeStamp(){
+      const time = Date.now();
+      let date = new Date(time);
+
+      const month = date.getMonth() + 1
+      const day = date.getDate();
+      const year = date.getFullYear();
+
+      let hour;
+
+      if(date.getHours() === 12){
+        hour = date.getHours() + 1;
+      }else{
+        date.getHours() > 12 ? hour = date.getHours()-12 : hour = date.getHours() 
+      }
+      const minute = date.getMinutes();
+      let seconds;
+      String(date.getSeconds()).length > 1 ? seconds = date.getSeconds() : seconds = `0${date.getSeconds()}`
+      
+      //console.log(`${day}/${month}/${year} ${hour}:${minute}:${seconds}`);
+      return `${day}/${month}/${year} ${hour}:${minute}:${seconds}`
+    }
+
     userTransfer(){
-      btnTransfer.addEventListener('click',(e)=>{
+      btnTransfer.addEventListener('click', (e) => {
         e.preventDefault();
+
+        let transactionOTP = this.generateOTP();
+
         let transferAmount = Number(inputTransferAmount.value);
         let receiverAcc = inputTransferTo.value;
       
         //let receiverDetail = this.accounts.find(acc => acc.userName === receiverAcc);
         let receiverDetail = this.#userFromLS
         .find(acc => String(acc.accountNumber) === receiverAcc);
-      
+        
+        //console.log(receiverDetail);
         // check if currentUser have enough money and if the receiver acc exist and if the transferAmount is possitive
         let transferCondition = currentUser.balance >= transferAmount && 
               receiverAcc && receiverAcc !== String(currentUser.accountNumber) && transferAmount > 0;
-              
-            console.log(currentUser.owner);
+
         if(transferCondition && receiverDetail){
+          //console.log(receiverDetail.balance + transferAmount);
+              const total = receiverDetail?.movements.reduce((a,b)=> a + b, 0);
 
-          this.#userFromLS.forEach(user =>{
-            if(user.owner === currentUser.owner){
-              user.movements.push(-transferAmount);
-              
-              receiverDetail.movements.push(transferAmount);
-            }
-          });
+              this.#userFromLS.forEach(user =>{
+                if(user.owner === currentUser.owner){
 
-          localStorage.setItem('Users',JSON.stringify(this.#userFromLS));
-      
-          // update UI
-          newAccount.updateUI(currentUser);
+                  let maxBalanceCheck = 
+                  receiverDetail.accType === 'Tier One' && 
+                  total + transferAmount <= 100000 || 
+                  receiverDetail.accType === 'Tier Two' && 
+                  total + transferAmount <= 1000000 ||
+                  receiverDetail.accType === 'Tier Three' && 
+                  total + transferAmount <= 5000000
+
+                  if(maxBalanceCheck && transactionOTP){
+
+                    Swal.fire({
+                      title:'supply OTP',
+                      text:`input this OTP code (${transactionOTP}) to conplete this transaction`,
+                      icon:'info',
+                      input: "text",
+                    })
+                    .then(fulfiled =>{
+
+                      if(fulfiled.isConfirmed && fulfiled.value === transactionOTP){
+                        // Generate time and date and save it to Local storage 
+                        const dateAndTime = this.timeStamp();
+                        let allDate = JSON.parse(localStorage.getItem('date')) || [];
+
+                        allDate.push(dateAndTime);
+                        localStorage.setItem('date',JSON.stringify(allDate));
+
+                        // Debit the sender
+                        user.movements.push(-transferAmount);
+                        // Credit the Receiver
+                        receiverDetail.movements.push(transferAmount);
+                        localStorage.setItem('Users',JSON.stringify(this.#userFromLS));
+          
+                        // update UI
+                        newAccount.updateUI(currentUser);
+                        // clearField
+                        inputTransferAmount.value = ""; inputTransferTo.value = "";
+                        transferAmount.blur;
+                        // Toast a successful message
+                        this.toast('success','Transfer Successful');
+                      }else{
+                        this.toast('error','Wrong OTP')
+                      }
+
+                    })
+                   
+                  }else{
+                    Swal.fire({
+                      title:"Warning",
+                      text : 'Maximum amount for the receiver exceeded',
+                      icon:'error'
+                    })
+                  }
+                }
+              });
         }else{
           // Sweet Alert here
-          new swal('Warning','Wrong Receiver info.','error');
+          Swal.fire('Warning','Wrong Receiver info.','error');
         }
-         
-        // clearField
-        inputTransferAmount.value = ""; inputTransferTo.value = "";
-        transferAmount.blur;
-      });
-    }
-  
-    userLoan(){
-      btnLoan.addEventListener('click',(e)=>{
-        e.preventDefault();
-        const loanAmount = Number(inputLoanAmount.value);
-        if(loanAmount > 0 && currentUser.movements.some(mov => mov >= loanAmount * 0.1)){
-
-          this.#userFromLS.forEach(element => {
-            if(element.owner === currentUser.owner){
-              element.movements.push(loanAmount);
-            }
-          });
-
-          localStorage.setItem('Users', JSON.stringify(this.#userFromLS));
-          // Update UI
-          newAccount.updateUI(currentUser);
-          // clear field
-          inputLoanAmount.value = "";
-        }else{
-          new swal('Warning','Wrong Input','error');
-        }
+    
       })
     }
   
-    closAcc(){
-      btnClose.addEventListener('click',(e)=>{
-        e.preventDefault();
-        let closeUser = inputCloseUsername.value;
-        let closePin = inputClosePin.value;
+    // userLoan(){
+    //   btnLoan.addEventListener('click',(e)=>{
+    //     e.preventDefault();
+    //     const loanAmount = Number(inputLoanAmount.value);
+    //     if(loanAmount > 0 && currentUser.movements.some(mov => mov >= loanAmount * 0.1)){
 
-        if(closeUser === currentUser.owner && closePin === currentUser.pin){
-          // Delete currentUser from Local storage;
+    //       this.#userFromLS.forEach(element => {
+    //         if(element.owner === currentUser.owner){
+    //           element.movements.push(loanAmount);
+    //         }
+    //       });
 
-          // LookUp user from Local Storage
-          const index = this.#userFromLS.findIndex(acc => acc.owner === currentUser.owner);
-          // Delete user from array.
-          this.#userFromLS.splice(index,1);
-          // Set Local storage with remaining users.
-          localStorage.setItem('Users',JSON.stringify(this.#userFromLS));
-          // Reload page.
-          location.reload();
-          // Remove UI.
-          containerApp.style.opacity = 0;
+    //       localStorage.setItem('Users', JSON.stringify(this.#userFromLS));
+    //       // Update UI
+    //       newAccount.updateUI(currentUser);
+    //       // clear field
+    //       inputLoanAmount.value = "";
+    //     }else{
+    //       Swal.fire('Warning','Wrong Input','error');
+    //     }
+    //   })
+    // }
+  
+    // closAcc(){
+    //   btnClose.addEventListener('click',(e)=>{
+    //     e.preventDefault();
+    //     let closeUser = inputCloseUsername.value;
+    //     let closePin = inputClosePin.value;
 
-        }else{
-          // Sweet Alart here
-          new swal('Warning','Wrong details','error');
-        }
-      });
-    }
+    //     if(closeUser === currentUser.owner && closePin === currentUser.pin){
+    //       // Delete currentUser from Local storage;
+
+    //       // LookUp user from Local Storage
+    //       const index = this.#userFromLS.findIndex(acc => acc.owner === currentUser.owner);
+    //       // Delete user from array.
+    //       this.#userFromLS.splice(index,1);
+    //       // Set Local storage with remaining users.
+    //       localStorage.setItem('Users',JSON.stringify(this.#userFromLS));
+    //       // Reload page.
+    //       location.reload();
+    //       // Remove UI.
+    //       containerApp.style.opacity = 0;
+
+    //     }else{
+    //       // Sweet Alart here
+    //       Swal.fire('Warning','Wrong details','error');
+    //     }
+    //   });
+    // }
   
     transactionSort(){
       btnSort.addEventListener('click',(e)=>{

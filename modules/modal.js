@@ -1,3 +1,4 @@
+import Swal from '../node_modules/sweetalert2/src/sweetalert2.js'
 
 const loginModal = document.querySelector('.login_modal');
 const signupModal = document.querySelector('.signup_modal');
@@ -17,9 +18,14 @@ const userNameField = document.querySelector('.user_name');
 const amountField = document.querySelector('.amount');
 const passwordField = document.querySelector('.password');
 const bvnField = document.querySelector('.bvn');
-const accountTypeField = document.querySelector('#account_type')
+const accountTypeField = document.querySelector('#account_type');
+const idTypeField = document.querySelector('.id_type');
+const idNumberField = document.querySelector('.id_number');
 
+// Others
 const labelBVN =document.querySelector('.bvn_labell');
+const idTypeSpan = document.querySelector('.id_type-span');
+const idNumberSpan = document.querySelector('.id_number-span');
 
 class Modal{
   
@@ -64,8 +70,6 @@ class Modal{
 }
 
 const modal = new Modal(btnSignupOpenModal,btnLoginOpenModal);
-
-//const Swal = await import('../sweetalert.js');
 class Register{
   accounts = JSON.parse(localStorage.getItem('Users')) || [];
   #user;
@@ -101,10 +105,26 @@ class Register{
       e.target.value = this._generateBVN();
     })
 
+    // Auto Add Minimum Amount for each account type
+    amountField.addEventListener('focus',(e)=>{
+
+      if(this.#accType === 'Tier One'){
+        e.target.value = 1000
+      }
+      if(this.#accType === 'Tier Two'){
+        e.target.value = 5000
+      }
+      if(this.#accType === 'Tier Three'){
+        e.target.value = 20000
+      }
+      console.log(e.target);
+    }); 
+
     accountTypeField.addEventListener('change',(e)=>{
       let select = e.target.value
-      if(select === 'Tier One'){
 
+      // Hide bvn field if Account type is Tier One
+      if(select === 'Tier One'){
         bvnField.value = "";
         bvnField.style.display = 'none';
         labelBVN.style.display = 'none';
@@ -113,8 +133,17 @@ class Register{
         labelBVN.style.display = 'block';
       }
 
+      // Display identity fields if account type is Tier three
+      if(select === 'Tier Three'){
+        idTypeSpan.classList.remove('display_none');
+        idNumberSpan.classList.remove('display_none');
+      }else{
+        idTypeSpan.classList.add('display_none');
+        idNumberSpan.classList.add('display_none');
+      }
+
+      // Set #accType to whatever is been selected.
       this.#accType = select;
-      console.log(select);
     })
 
     btnRegister.addEventListener('click', (e)=>{
@@ -123,12 +152,47 @@ class Register{
       let fullName = fullNameField.value;
       let mobile = mobileField.value;
       let userName = userNameField.value;
-      let amount = Number(amountField.value)//Value Converted to number;
+      let amount = Number(amountField.value)//Value Converted to number;;
       let password = passwordField.value;
-      let bvn;
+      let bvn, idenType, idenNumber;
 
-      // Auto generate BVN for Tier One acount
-      this.#accType === 'Tier One' ? bvn = this._generateBVN() : bvn = bvnField.value;
+      // No BVN for Tier One acount
+      this.#accType === 'Tier One' ? bvn = null : bvn = bvnField.value;
+
+      // Set identity type and number for Tier Three
+      if(this.#accType === 'Tier Three'){
+        idenType = idTypeField.value;
+        idenNumber = idNumberField.value
+      }
+
+      // Check if amount match the minimum amount for each account type.
+
+      if(this.#accType === 'Tier One' && amount !== 1000){
+        Swal.fire({
+          title : "Error",
+          text : "Minimum amount for Tier One is 1000",
+          icon : 'error',
+        })
+
+        return;
+      }
+
+      if( this.#accType === 'Tier Two' && amount !== 5000){
+        Swal.fire({
+          title : "Error",
+          text : "Minimum amount for Tier Two is 5000",
+          icon : 'error',
+        })
+        return;
+      }
+
+      if(this.#accType === 'Tier Three' && amount !== 20000){
+        Swal.fire({
+          title : "Error",
+          text : "Minimum amount for Tier Three is 20000",
+          icon : 'error',
+        })
+      }
 
       let interest = this._calcInterest();
       const required = fullName !== '' && 
@@ -144,7 +208,8 @@ class Register{
             bvn: bvn,
             accountNumber: this._generateAccountNumber(),
             accType : this.#accType,
-            
+            idenType,
+            idenNumber,
             userName,
             mobile,
           }
@@ -157,7 +222,7 @@ class Register{
           modal.hideModal(signupModal);
   
           // After Successful Registration, Load Login Modal Automatically.
-          new swal({
+          Swal.fire({
             title: "Success",
             text: "Registration Successful, Kindly Login",
             icon: "success",
@@ -181,18 +246,20 @@ class Register{
      
       if(userNameExist){
         // if yes Alart Error
-        new swal({
+        Swal.fire({
           title: "Error",
           text: "Username Alredy exist!",
           icon: 'error'
         })
       }else{
         // Check if no user at all or all field are filled
+
         if(this.accounts.length <= 0 && required || required){
-          authUser()
+          authUser();
+          //console.log('User Auth');
         }else{
           // Sweet Alart here.
-          new swal({
+          Swal.fire({
             title:"Error",
             text: 'All fields are require',
             icon : 'error'

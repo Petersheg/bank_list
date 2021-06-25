@@ -15,30 +15,45 @@ const containerMovements = document.querySelector('.movements');
 //const {signUp} = await import('./modal.js');
 
 class Account{
-
+  
   constructor(){
     this.calcDate();
   }
+  
+    getime(){
+      const dataAndTime = JSON.parse(localStorage.getItem('date'));
+    
+      dataAndTime.map((element)=>{
+          //this.#time = element
+          let movDate = document.createElement('div');
+              movDate.classList.add('movements__date');
+              movDate.textContent = `${element}`;
+              //movRow.appendChild(movDate);
+      })
+    }
 
     appendMovement(movements,sorted= false){
+
       containerMovements.innerHTML = '';
       const movs = sorted ? movements.slice().sort((a,b)=> a-b) : movements;
-    
-      movs.forEach((mov,index) => {
-    
+      //let dateTime = this.timeStamp();
+      let movRow;
+      movs.map((mov,index) => {
         // Create Html element to insert the movements to
         const type = mov > 0 ? 'credit' : 'debit';
-    
+        
         // Create all elements with javascript
-        const movRow = document.createElement('div');
+        movRow = document.createElement('div');
               movRow.classList.add('movements__row');
+
         const movType = document.createElement('div');
               movType.classList.add(`movements__type`,`movements__type--${type}`);
-              movType.textContent = `${index+1} ${type}`
+              movType.textContent = `${index+1} ${type}`;
+
         const movValue = document.createElement('div');
               movValue.classList.add('movements__value');
               movValue.textContent = `${mov}€`
-    
+
         // Append them inside each other
         movRow.appendChild(movType);
         movRow.appendChild(movValue);
@@ -46,6 +61,7 @@ class Account{
         // Append movRow to parent container
         containerMovements.insertAdjacentElement('afterbegin',movRow);
       });
+      
     }
   
     // createUserName(accs) {
@@ -101,6 +117,8 @@ class Account{
       const month = date.getMonth() + 1;
       const year  = date.getFullYear();
       
+      return `${day}/${month}/${year}`;
+
       let todayDate = `${day}/${month}/${year}`
       labelDate.textContent = todayDate;
     }
