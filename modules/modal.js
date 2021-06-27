@@ -1,4 +1,4 @@
-import Swal from '../node_modules/sweetalert2/src/sweetalert2.js'
+import Swal from '../node_modules/sweetalert2/src/sweetalert2.js';
 
 const loginModal = document.querySelector('.login_modal');
 const signupModal = document.querySelector('.signup_modal');
@@ -9,7 +9,7 @@ const signupCloseModal = document.querySelector('.signup_btn--close-modal');
 //BTNs
 const btnLoginOpenModal = document.querySelector('.open_login-modal');
 const btnSignupOpenModal = document.querySelector('.open_signup-modal');
-const btnRegister = document.querySelector('.register_button');//'.register_form'
+const btnRegister = document.querySelector('.register_button'); //'.register_form'
 
 // input fields
 const fullNameField = document.querySelector('.fullname');
@@ -23,260 +23,292 @@ const idTypeField = document.querySelector('.id_type');
 const idNumberField = document.querySelector('.id_number');
 
 // Others
-const labelBVN =document.querySelector('.bvn_labell');
+const labelBVN = document.querySelector('.bvn_labell');
 const idTypeSpan = document.querySelector('.id_type-span');
 const idNumberSpan = document.querySelector('.id_number-span');
 
-class Modal{
-  
-    constructor(btnSignupOpenModal ,btnLoginOpenModal){
+class Modal {
+  constructor(btnSignupOpenModal, btnLoginOpenModal) {
+    this.btnSignupOpenModal = btnSignupOpenModal;
+    this.btnLoginOpenModal = btnLoginOpenModal;
 
-      this.btnSignupOpenModal = btnSignupOpenModal;
-      this.btnLoginOpenModal = btnLoginOpenModal;
-        
-      this._openModal(this.btnLoginOpenModal,loginModal);
-      this._openModal(this.btnSignupOpenModal,signupModal);
-      this._closeModal(loginCloseModal,loginModal);
-      this._closeModal(signupCloseModal,signupModal);
-    }
-    
-    showModal(modal = loginModal){
-      modal.classList.remove('hidden');
-      overlay.classList.remove('hidden');
-    }
-    _openModal(btn = btnLoginOpenModal,modal){
-      btn.addEventListener('click', ()=>{
-        this.showModal(modal);
-      })
-    }
-  
-    hideModal(modal = loginModal){
-      modal.classList.add('hidden');
-      overlay.classList.add('hidden');
-    }
-  
-    _closeModal(btn,modal){
-  
-      // Add event listener to the btn passed in
-      btn.addEventListener('click', ()=>{
-        this.hideModal(modal);
-      })
-  
-      // Add evebt listener to overlay to close modal
-      overlay.addEventListener('click',()=>{
-        this.hideModal(modal);
-      })
-    }
+    this._openModal(this.btnLoginOpenModal, loginModal);
+    this._openModal(this.btnSignupOpenModal, signupModal);
+    this._closeModal(loginCloseModal, loginModal);
+    this._closeModal(signupCloseModal, signupModal);
+  }
+
+  showModal(modal = loginModal) {
+    modal.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+  }
+  _openModal(btn = btnLoginOpenModal, modal) {
+    btn.addEventListener('click', () => {
+      this.showModal(modal);
+    });
+  }
+
+  hideModal(modal = loginModal) {
+    modal.classList.add('hidden');
+    overlay.classList.add('hidden');
+  }
+
+  _closeModal(btn, modal) {
+    // Add event listener to the btn passed in
+    btn.addEventListener('click', () => {
+      this.hideModal(modal);
+    });
+
+    // Add evebt listener to overlay to close modal
+    overlay.addEventListener('click', () => {
+      this.hideModal(modal);
+    });
+  }
 }
 
-const modal = new Modal(btnSignupOpenModal,btnLoginOpenModal);
-class Register{
+const modal = new Modal(btnSignupOpenModal, btnLoginOpenModal);
+class Register {
   accounts = JSON.parse(localStorage.getItem('Users')) || [];
   #user;
   #accType;
-  constructor(){
+  constructor() {
     //btnRegister.addEventListener('click', this._register.bind(this));
     this._generateBVN();
     this._register();
   }
 
-  // Calculate Interest rate 
-  _calcInterest(){
+  // Calculate Interest rate
+  _calcInterest() {
     let intRate = Date.now();
-    let newrate = Number(intRate.toString().split('').slice(11,14).join(''))/10
-    return newrate
+    let newrate =
+      Number(intRate.toString().split('').slice(11, 14).join('')) / 10;
+    return newrate;
   }
 
-  _generateBVN(){
+  _generateBVN() {
     let newDate = Date.now();
-    let newBVN = Number(newDate.toString().split('').slice(3,14).join(''))
+    let newBVN = Number(newDate.toString().split('').slice(3, 14).join(''));
     return newBVN;
   }
 
-  _generateAccountNumber(){
+  _generateAccountNumber() {
     return this._generateBVN() - 1111000000;
   }
 
-  _register(){
+  timeStamp() {
+    const time = Date.now();
+    let date = new Date(time);
+
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    let hour;
+
+    if (date.getHours() === 12) {
+      hour = date.getHours() + 1;
+    } else {
+      date.getHours() > 12
+        ? (hour = date.getHours() - 12)
+        : (hour = date.getHours());
+    }
+    const minute = date.getMinutes();
+    let seconds;
+    String(date.getSeconds()).length > 1
+      ? (seconds = date.getSeconds())
+      : (seconds = `0${date.getSeconds()}`);
+
+    //console.log(`${day}/${month}/${year} ${hour}:${minute}:${seconds}`);
+    return `${day}/${month}/${year}      ${hour}:${minute}:${seconds}`;
+  }
+  _register() {
     console.log(this.accounts.length);
 
     // Suggest BVN for User
-    bvnField.addEventListener('focus',(e)=>{
+    bvnField.addEventListener('focus', e => {
       e.target.value = this._generateBVN();
-    })
+    });
 
     // Auto Add Minimum Amount for each account type
-    amountField.addEventListener('focus',(e)=>{
-
-      if(this.#accType === 'Tier One'){
-        e.target.value = 1000
+    amountField.addEventListener('focus', e => {
+      if (this.#accType === 'Tier One') {
+        e.target.value = 1000;
       }
-      if(this.#accType === 'Tier Two'){
-        e.target.value = 5000
+      if (this.#accType === 'Tier Two') {
+        e.target.value = 5000;
       }
-      if(this.#accType === 'Tier Three'){
-        e.target.value = 20000
+      if (this.#accType === 'Tier Three') {
+        e.target.value = 20000;
       }
       console.log(e.target);
-    }); 
+    });
 
-    accountTypeField.addEventListener('change',(e)=>{
-      let select = e.target.value
+    // Hide BVN field for Tier One & Display identity fields for Tier three
+    accountTypeField.addEventListener('change', e => {
+      let select = e.target.value;
 
       // Hide bvn field if Account type is Tier One
-      if(select === 'Tier One'){
-        bvnField.value = "";
+      if (select === 'Tier One') {
+        bvnField.value = '';
         bvnField.style.display = 'none';
         labelBVN.style.display = 'none';
-      }else{
+      } else {
         bvnField.style.display = 'block';
         labelBVN.style.display = 'block';
       }
 
       // Display identity fields if account type is Tier three
-      if(select === 'Tier Three'){
+      if (select === 'Tier Three') {
         idTypeSpan.classList.remove('display_none');
         idNumberSpan.classList.remove('display_none');
-      }else{
+      } else {
         idTypeSpan.classList.add('display_none');
         idNumberSpan.classList.add('display_none');
       }
 
       // Set #accType to whatever is been selected.
       this.#accType = select;
-    })
+    });
 
-    btnRegister.addEventListener('click', (e)=>{
+    btnRegister.addEventListener('click', e => {
       e.preventDefault();
       // Get the value for all input fields
       let fullName = fullNameField.value;
       let mobile = mobileField.value;
       let userName = userNameField.value;
-      let amount = Number(amountField.value)//Value Converted to number;;
+      let amount = Number(amountField.value); //Value Converted to number;;
       let password = passwordField.value;
       let bvn, idenType, idenNumber;
 
       // No BVN for Tier One acount
-      this.#accType === 'Tier One' ? bvn = null : bvn = bvnField.value;
+      this.#accType === 'Tier One' ? (bvn = null) : (bvn = bvnField.value);
 
       // Set identity type and number for Tier Three
-      if(this.#accType === 'Tier Three'){
+      if (this.#accType === 'Tier Three') {
         idenType = idTypeField.value;
-        idenNumber = idNumberField.value
+        idenNumber = idNumberField.value;
       }
 
       // Check if amount match the minimum amount for each account type.
 
-      if(this.#accType === 'Tier One' && amount !== 1000){
+      if (this.#accType === 'Tier One' && amount !== 1000) {
         Swal.fire({
-          title : "Error",
-          text : "Minimum amount for Tier One is 1000",
-          icon : 'error',
-        })
+          title: 'Error',
+          text: 'Minimum amount for Tier One is 1000',
+          icon: 'error',
+        });
 
         return;
       }
 
-      if( this.#accType === 'Tier Two' && amount !== 5000){
+      if (this.#accType === 'Tier Two' && amount !== 5000) {
         Swal.fire({
-          title : "Error",
-          text : "Minimum amount for Tier Two is 5000",
-          icon : 'error',
-        })
+          title: 'Error',
+          text: 'Minimum amount for Tier Two is 5000',
+          icon: 'error',
+        });
         return;
       }
 
-      if(this.#accType === 'Tier Three' && amount !== 20000){
+      if (this.#accType === 'Tier Three' && amount !== 20000) {
         Swal.fire({
-          title : "Error",
-          text : "Minimum amount for Tier Three is 20000",
-          icon : 'error',
-        })
+          title: 'Error',
+          text: 'Minimum amount for Tier Three is 20000',
+          icon: 'error',
+        });
       }
 
       let interest = this._calcInterest();
-      const required = fullName !== '' && 
-      mobile !== '' && userName !== '' && amount !== '' && password !== '';
+      const required =
+        fullName !== '' &&
+        mobile !== '' &&
+        userName !== '' &&
+        amount !== '' &&
+        password !== '';
 
-      const authUser = ()=>{
-           // create an object base on the values 
-           this.#user = {
-            owner : fullName,
-            movements:[amount],
-            interestRate : interest,
-            pin: password,
-            bvn: bvn,
-            accountNumber: this._generateAccountNumber(),
-            accType : this.#accType,
-            idenType,
-            idenNumber,
-            userName,
-            mobile,
+      const authUser = () => {
+        // create an object base on the values
+        this.#user = {
+          owner: fullName,
+          movements: [amount],
+          movementsDate:[this.timeStamp()],
+          interestRate: interest,
+          pin: password,
+          bvn: bvn,
+          accountNumber: this._generateAccountNumber(),
+          accType: this.#accType,
+          idenType,
+          idenNumber,
+          userName,
+          mobile,
+        };
+
+        this.setItem();
+        // Clear input fields
+        fullNameField.value =
+          mobileField.value =
+          userNameField.value =
+          amountField.value =
+          passwordField.value =
+          bvnField.value =
+            '';
+
+        modal.hideModal(signupModal);
+
+        // After Successful Registration, Load Login Modal Automatically.
+        Swal.fire({
+          title: 'Success',
+          text: 'Registration Successful, Kindly Login',
+          icon: 'success',
+        }).then(fulfilled => {
+          if (fulfilled) {
+            // Reload Page for login to take effect.
+            location.reload();
           }
-  
-          this.setItem()
-          // Clear input fields
-          fullNameField.value = mobileField.value =
-          userNameField.value = amountField.value = passwordField.value = bvnField.value = "";
-  
-          modal.hideModal(signupModal);
-  
-          // After Successful Registration, Load Login Modal Automatically.
-          Swal.fire({
-            title: "Success",
-            text: "Registration Successful, Kindly Login",
-            icon: "success",
-          }).then((fulfilled)=>{
-            if(fulfilled){
-              // Reload Page for login to take effect.
-              location.reload();
-            }
-          })
-      }
+        });
+      };
 
       let userNameExist;
 
-      // If there is registered user if yes then check if userName user try to register does not exist.
-      if(this.accounts.length > 0){
-        userNameExist = 
-        this.accounts
-        .map(acc => acc.userName)
-        .some(user => userNameField.value === user)
+      // If there is registered user then check if the userName user try to register does not exist.
+      if (this.accounts.length > 0) {
+        userNameExist = this.accounts
+          .map(acc => acc.userName)
+          .some(user => userNameField.value === user);
       }
-     
-      if(userNameExist){
+
+      if (userNameExist) {
         // if yes Alart Error
         Swal.fire({
-          title: "Error",
-          text: "Username Alredy exist!",
-          icon: 'error'
-        })
-      }else{
+          title: 'Error',
+          text: 'Username Alredy exist!',
+          icon: 'error',
+        });
+      } else {
         // Check if no user at all or all field are filled
 
-        if(this.accounts.length <= 0 && required || required){
+        if ((this.accounts.length <= 0 && required) || required) {
           authUser();
           //console.log('User Auth');
-        }else{
+        } else {
           // Sweet Alart here.
           Swal.fire({
-            title:"Error",
+            title: 'Error',
             text: 'All fields are require',
-            icon : 'error'
-          })
+            icon: 'error',
+          });
         }
       }
-
-    })
+    });
   }
 
-  setItem(){
+  setItem() {
     // Push the object into an array
     this.accounts.push(this.#user);
 
-    // Store the data inside local storage  
+    // Store the data inside local storage
     localStorage.setItem('Users', JSON.stringify(this.accounts));
   }
 }
-const signUp = new Register;
-export {Modal,signUp}
+const signUp = new Register();
+export { Modal, signUp };
