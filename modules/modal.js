@@ -1,4 +1,6 @@
-import Swal from '../node_modules/sweetalert2/src/sweetalert2.js';
+//import Swal from '../node_modules/sweetalert2/src/sweetalert2.js';
+
+import Swal from "sweetalert2";
 
 const loginModal = document.querySelector('.login_modal');
 const signupModal = document.querySelector('.signup_modal');
@@ -69,7 +71,6 @@ class Modal {
 const modal = new Modal(btnSignupOpenModal, btnLoginOpenModal);
 class Register {
   accounts = JSON.parse(localStorage.getItem('Users')) || [];
-  #user;
   #accType;
   constructor() {
     //btnRegister.addEventListener('click', this._register.bind(this));
@@ -123,7 +124,7 @@ class Register {
   }
   _register() {
     console.log(this.accounts.length);
-
+    let userData;
     // Suggest BVN for User
     bvnField.addEventListener('focus', e => {
       e.target.value = this._generateBVN();
@@ -228,7 +229,7 @@ class Register {
 
       const authUser = () => {
         // create an object base on the values
-        this.#user = {
+        userData = {
           owner: fullName,
           movements: [amount],
           movementsDate:[this.timeStamp()],
@@ -243,7 +244,7 @@ class Register {
           mobile,
         };
 
-        this.setItem();
+        this.setItem(userData);
         // Clear input fields
         fullNameField.value =
           mobileField.value =
@@ -302,9 +303,9 @@ class Register {
     });
   }
 
-  setItem() {
+  setItem(userData) {
     // Push the object into an array
-    this.accounts.push(this.#user);
+    this.accounts.push(userData);
 
     // Store the data inside local storage
     localStorage.setItem('Users', JSON.stringify(this.accounts));

@@ -4,7 +4,8 @@
   "description": "A bank app ",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build script.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,9 @@
   },
   "homepage": "https://github.com/Petersheg/bank_list#readme",
   "dependencies": {
+    "core-js": "^3.15.1",
+    "parcel": "^2.0.0-beta.2",
+    "regenerator-runtime": "^0.13.7",
     "sweetalert2": "^11.0.18"
   }
 }

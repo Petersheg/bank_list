@@ -1,9 +1,10 @@
 /*This Class will handle everything functionality perform by the user
 eg user login, Transfer, Loan and closing account or sorting their transaction*/
 
-const { Modal, signUp } = await import('./modal.js');
-const { Account } = await import('./account.js');
-import Swal from '../node_modules/sweetalert2/src/sweetalert2.js';
+import { Modal, signUp } from './modal.js';
+import { Account } from './account.js';
+import Swal from "sweetalert2";
+// import Swal from '../node_modules/sweetalert2/src/sweetalert2.js';
 
 // Data
 // Check if there is any registered user.
