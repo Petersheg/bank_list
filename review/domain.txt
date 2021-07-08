@@ -1,0 +1,22 @@
+Extrated Domains
+
+
+Customers
+- FullName
+- Mobile Number
+- BVN
+- AddFunds()
+- TransferFunds(account Number)
+
+
+Account
+- Balance
+
+
+
+
+
+Relationships
+
+
+1- Customer Owns Account
