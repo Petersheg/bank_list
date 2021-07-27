@@ -1,6 +1,6 @@
 // @ts-nocheck
 /*This class will handle everything that is not trigger by the user but specific to the system
-  eg appending user action(Deposit or Credit), Creating Username, Calculating Balance after every
+  eg appending user action(Deposit or Credit), Calculating Balance after every
   action,
 */
 
@@ -16,6 +16,7 @@ const containerMovements = document.querySelector('.movements');
 //const {signUp} = await import('./modal.js');
 
 class Account {
+  
   constructor() {
     this.calcDate();
   }
@@ -23,7 +24,8 @@ class Account {
 
   appendMovement(user, sorted = false) {
     containerMovements.innerHTML = '';
-    const movs = sorted ? user.movements.slice().sort((a, b) => a - b) : user.movements;
+    const movs = sorted ? user.movements.sort((a, b) => a - b) : user.movements;
+    console.log(user.movements);
     //let dateTime = this.timeStamp();
     let movRow;
     movs.map((mov, index) => {
@@ -57,17 +59,6 @@ class Account {
     });
   }
 
-  // createUserName(accs) {
-  //   let allUsers = [];
-  //   accs.forEach(acc=>{
-  //     acc.userName = acc.owner.split(' ')
-  //     .map(val=> val[0])
-  //     .join('')
-  //     .toLowerCase()
-  //     allUsers.push(acc);
-  //   });
-  // };
-
   balance(acc) {
     acc.balance = acc.movements.reduce((acc, cur) => {
       return acc + cur;
@@ -92,8 +83,9 @@ class Account {
       .reduce((acc, cur) => acc + cur, 0);
     labelSumInterest.textContent = `${interest.toFixed(1)}€`;
   }
+
   // Update Ui
-  updateUI(user) {
+  updateUI(user){
     // Calculate CurrentUser Movements
     this.appendMovement(user);
     //appendMovement(user.movements);
@@ -116,6 +108,7 @@ class Account {
     let todayDate = `${day}/${month}/${year}`;
     labelDate.textContent = todayDate;
   }
+
 }
 
 export { Account };

@@ -2,10 +2,10 @@
   "name": "bank-list",
   "version": "1.0.0",
   "description": "A bank app ",
-  "main": "script.js",
+  "main": "newScript.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build script.js"
+    "build": "parcel build newScript.js"
   },
   "repository": {
     "type": "git",

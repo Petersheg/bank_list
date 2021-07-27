@@ -1,4 +1,4 @@
-/*This Class will handle everything functionality perform by the user
+/*This Class will handle every functionality perform by the user
 eg user login, Transfer, Loan and closing account or sorting their transaction*/
 
 import { Modal, signUp } from './modal.js';
@@ -217,6 +217,7 @@ class Auser {
 
                   // Debit the sender
                   user.movements.push(-transferAmount);
+
                   // Credit the Receiver
                   receiverDetail.movements.push(transferAmount);
                   
@@ -227,12 +228,14 @@ class Auser {
 
                   // update UI
                   newAccount.updateUI(currentUser);
+
                   // clearField
                   inputTransferAmount.value = '';
                   inputTransferTo.value = '';
                   transferAmount.blur;
                   // Toast a successful message
                   this.toast('success', 'Transfer Successful');
+                  
                 } else {
                   this.toast('error', 'Wrong OTP');
                 }

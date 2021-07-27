@@ -140,12 +140,12 @@
       this[globalName] = mainExports;
     }
   }
-})({"63iPG":[function(require,module,exports) {
+})({"2Mlp2":[function(require,module,exports) {
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d751713988987e9331980363e24189ce";
-module.bundle.HMR_BUNDLE_ID = "d231a23f43d60e28ed500b93b4f5078c";
+module.bundle.HMR_BUNDLE_ID = "614ba6f468a8ed289d9aa88c13d56bbf";
 // @flow
 /*global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE*/
 /*::
@@ -441,10 +441,13 @@ id) /*: string*/
   acceptedAssets[id] = true;
 }
 
-},{}],"4ThtM":[function(require,module,exports) {
-require("regenerator-runtime/runtime"),require("core-js/stable");var e,t=(e=require("sweetalert2"))&&e.__esModule?e.default:e;const n=document.querySelector(".login_modal"),o=document.querySelector(".signup_modal"),r=document.querySelector(".overlay"),s=document.querySelector(".login_btn--close-modal"),i=document.querySelector(".signup_btn--close-modal"),a=document.querySelector(".open_login-modal"),l=document.querySelector(".open_signup-modal"),c=document.querySelector(".register_button"),u=document.querySelector(".fullname"),d=document.querySelector(".mobile"),m=document.querySelector(".user_name"),h=document.querySelector(".amount"),v=document.querySelector(".password"),p=document.querySelector(".bvn"),g=document.querySelector("#account_type"),y=document.querySelector(".id_type"),S=document.querySelector(".id_number"),_=document.querySelector(".bvn_labell"),f=document.querySelector(".id_type-span"),b=document.querySelector(".id_number-span");class q{constructor(e,t){this.btnSignupOpenModal=e,this.btnLoginOpenModal=t,this._openModal(this.btnLoginOpenModal,n),this._openModal(this.btnSignupOpenModal,o),this._closeModal(s,n),this._closeModal(i,o)}showModal(e=n){e.classList.remove("hidden"),r.classList.remove("hidden")}_openModal(e=a,t){e.addEventListener("click",(()=>{this.showModal(t)}))}hideModal(e=n){e.classList.add("hidden"),r.classList.add("hidden")}_closeModal(e,t){e.addEventListener("click",(()=>{this.hideModal(t)})),r.addEventListener("click",(()=>{this.hideModal(t)}))}}const T=new q(l,a);const L=new class{accounts=JSON.parse(localStorage.getItem("Users"))||[];#undefined;constructor(){this._generateBVN(),this._register()}_calcInterest(){let e=Date.now();return Number(e.toString().split("").slice(11,14).join(""))/10}_generateBVN(){let e=Date.now();return Number(e.toString().split("").slice(3,14).join(""))}_generateAccountNumber(){return this._generateBVN()-1111e6}timeStamp(){const e=Date.now();let t=new Date(e);const n=t.getMonth()+1,o=t.getDate(),r=t.getFullYear();let s;s=12===t.getHours()?t.getHours()+1:t.getHours()>12?t.getHours()-12:t.getHours();const i=t.getMinutes();let a;return a=String(t.getSeconds()).length>1?t.getSeconds():`0${t.getSeconds()}`,`${o}/${n}/${r}      ${s}:${i}:${a}`}_register(){let e;console.log(this.accounts.length),p.addEventListener("focus",(e=>{e.target.value=this._generateBVN()})),h.addEventListener("focus",(e=>{"Tier One"===this.#undefined&&(e.target.value=1e3),"Tier Two"===this.#undefined&&(e.target.value=5e3),"Tier Three"===this.#undefined&&(e.target.value=2e4),console.log(e.target)})),g.addEventListener("change",(e=>{let t=e.target.value;"Tier One"===t?(p.value="",p.style.display="none",_.style.display="none"):(p.style.display="block",_.style.display="block"),"Tier Three"===t?(f.classList.remove("display_none"),b.classList.remove("display_none")):(f.classList.add("display_none"),b.classList.add("display_none")),this.#undefined=t})),c.addEventListener("click",(n=>{n.preventDefault();let r,s,i,a=u.value,l=d.value,c=m.value,g=Number(h.value),_=v.value;if(r="Tier One"===this.#undefined?null:p.value,"Tier Three"===this.#undefined&&(s=y.value,i=S.value),"Tier One"===this.#undefined&&1e3!==g)return void t.fire({title:"Error",text:"Minimum amount for Tier One is 1000",icon:"error"});if("Tier Two"===this.#undefined&&5e3!==g)return void t.fire({title:"Error",text:"Minimum amount for Tier Two is 5000",icon:"error"});"Tier Three"===this.#undefined&&2e4!==g&&t.fire({title:"Error",text:"Minimum amount for Tier Three is 20000",icon:"error"});let f=this._calcInterest();const b=""!==a&&""!==l&&""!==c&&""!==g&&""!==_,q=()=>{e={owner:a,movements:[g],movementsDate:[this.timeStamp()],interestRate:f,pin:_,bvn:r,accountNumber:this._generateAccountNumber(),accType:this.#undefined,idenType:s,idenNumber:i,userName:c,mobile:l},this.setItem(e),u.value=d.value=m.value=h.value=v.value=p.value="",T.hideModal(o),t.fire({title:"Success",text:"Registration Successful, Kindly Login",icon:"success"}).then((e=>{e&&location.reload()}))};let L;this.accounts.length>0&&(L=this.accounts.map((e=>e.userName)).some((e=>m.value===e))),L?t.fire({title:"Error",text:"Username Alredy exist!",icon:"error"}):this.accounts.length<=0&&b||b?q():t.fire({title:"Error",text:"All fields are require",icon:"error"})}))}setItem(e){this.accounts.push(e),localStorage.setItem("Users",JSON.stringify(this.accounts))}},M=document.querySelector(".balance__value"),x=document.querySelector(".summary__value--in"),w=document.querySelector(".summary__value--out"),E=document.querySelector(".summary__value--interest"),N=(document.querySelector(".timer"),document.querySelector(".date")),$=document.querySelector(".movements");let O;L?.accounts&&(O=JSON.parse(localStorage.getItem("Users"))||[]);const C=[...O],D=new class{constructor(){this.calcDate()}appendMovement(e,t=!1){$.innerHTML="";const n=t?e.movements.sort(((e,t)=>e-t)):e.movements;let o;console.log(e.movements),n.map(((t,n)=>{const r=t>0?"credit":"debit";let s=e.movementsDate[n];o=document.createElement("div"),o.classList.add("movements__row");const i=document.createElement("div");i.classList.add("movements__type",`movements__type--${r}`),i.textContent=`${n+1} ${r}`;let a=document.createElement("div");a.classList.add("movements__date"),a.textContent=`${s}`;const l=document.createElement("div");l.classList.add("movements__value"),l.textContent=`${t}€`,o.appendChild(i),o.appendChild(a),o.appendChild(l),$.insertAdjacentElement("afterbegin",o)}))}balance(e){e.balance=e.movements.reduce(((e,t)=>e+t),0),M.textContent=`${e.balance}€`}calcSumary(e){const t=e.movements.filter((e=>e>0)).reduce(((e,t)=>e+t),0);x.textContent=`${t}€`;const n=e.movements.filter((e=>e<0)).reduce(((e,t)=>e+t),0);w.textContent=`${Math.abs(n)}€`;const o=e.movements.filter((e=>e>0)).map((t=>t*e.interestRate/100)).filter((e=>e>=1)).reduce(((e,t)=>e+t),0);E.textContent=`${o.toFixed(1)}€`}updateUI(e){this.appendMovement(e),this.balance(e),this.calcSumary(e)}calcDate(){const e=new Date;let t=`${e.getDate()}/${e.getMonth()+1}/${e.getFullYear()}`;N.textContent=t}},I=document.querySelector(".login__btn"),k=document.querySelector(".form__btn--transfer"),U=document.querySelector(".btn--sort"),W=document.querySelector(".open_login-modal"),A=document.querySelector(".open_signup-modal"),B=document.querySelector(".logout"),H=document.querySelector(".login__input--user"),P=document.querySelector(".login__input--pin"),j=document.querySelector(".form__input--to"),J=document.querySelector(".form__input--amount"),R=document.querySelector(".welcome"),V=(document.querySelector(".bvn_label"),document.querySelector(".acc_label")),F=document.querySelector(".acc-type_label"),Y=document.querySelector(".app"),K=new q(A,W);let z,G=!1;new class{#undefined=JSON.parse(localStorage.getItem("Users"))||[];constructor(e){this.accounts=e,this.userLogin(),this.userTransfer(),this.transactionSort(),this.logout()}userLogin(){I.addEventListener("click",(e=>{e.preventDefault(),z=this.#undefined.find((e=>e.userName===H.value))||[];z?.pin===P.value&&z?.userName==H.value?(Y.style.opacity=1,R.textContent=`Welcome here ${z.owner}`,R.classList.add("highlight"),V.textContent=` ACC: ${z.accountNumber}`,V.classList.remove("hidden"),V.style.paddingLeft="15px",F.textContent=`Type: ${z.accType}`,F.classList.remove("hidden"),F.style.paddingLeft="10px",H.value="",P.value="",P.blur,K.hideModal(),W.classList.add("hidden"),A.classList.add("hidden"),B.classList.remove("hidden"),D.updateUI(z)):t.fire("Warning","Wrong Log in details","error")}))}generateOTP(){let e=Date.now();return e=String(e).split("").slice(8,13).join(""),e}toast(e,n){t.mixin({toast:!0,position:"top-end",showConfirmButton:!1,timer:3e3,timerProgressBar:!0,didOpen:e=>{e.addEventListener("mouseenter",t.stopTimer),e.addEventListener("mouseleave",t.resumeTimer)}}).fire({icon:e,title:n})}userTransfer(){k.addEventListener("click",(e=>{e.preventDefault();let n=this.generateOTP(),o=Number(J.value),r=j.value,s=this.#undefined.find((e=>String(e.accountNumber)===r));if(z.balance>=o&&r&&r!==String(z.accountNumber)&&o>0&&s){const e=s?.movements?.reduce?.(((e,t)=>e+t),0);this.#undefined.forEach((r=>{if(r.owner===z.owner){("Tier One"===s.accType&&e+o<=1e5||"Tier Two"===s.accType&&e+o<=1e6||"Tier Three"===s.accType&&e+o<=5e6)&&n?t.fire({title:"supply OTP",text:`input this OTP code (${n}) to conplete this transaction`,icon:"info",input:"text"}).then((e=>{if(e.isConfirmed&&e.value===n){const e=L.timeStamp();r.movementsDate.push(e),s.movementsDate.push(e),r.movements.push(-o),s.movements.push(o),localStorage.setItem("Users",JSON.stringify(this.#undefined)),D.updateUI(z),J.value="",j.value="",o.blur,this.toast("success","Transfer Successful")}else this.toast("error","Wrong OTP")})):t.fire({title:"Warning",text:"Maximum amount for the receiver exceeded",icon:"error"})}}))}else t.fire("Warning","Wrong Receiver info.","error")}))}transactionSort(){U.addEventListener("click",(e=>{e.preventDefault(),D.appendMovement(z.movements,!G),G=!G}))}logout(){B.addEventListener("click",(()=>{Y.style.opacity=0,B.classList.add("hidden"),W.classList.remove("hidden"),A.classList.remove("hidden"),location.reload()}))}}(C);
+},{}],"6Ctme":[function(require,module,exports) {
+var _structUser = require("./struct/user");
+require('core-js/stable');
+require('regenerator-runtime/runtime');
+new _structUser.User();
 
-},{"regenerator-runtime/runtime":"62Qib","core-js/stable":"1PFvP","sweetalert2":"65nX0"}],"62Qib":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"62Qib","core-js/stable":"1PFvP","./struct/user":"5M7RE"}],"62Qib":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
  *
@@ -12898,7 +12901,136 @@ $({ target: 'URL', proto: true, enumerable: true }, {
   }
 });
 
-},{"../internals/export":"7f5VM"}],"65nX0":[function(require,module,exports) {
+},{"../internals/export":"7f5VM"}],"5M7RE":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "User", function () {
+  return User;
+});
+var _helperHelperfuncJs = require("./helper/helperfunc.js");
+var _htmlJs = require("./html.js");
+var _store = require('./store');
+var _storeDefault = _parcelHelpers.interopDefault(_store);
+var _accountsJs = require("./accounts.js");
+var _controllerRegisterJs = require('./controller/register.js');
+var _controllerLoginJs = require('./controller/login.js');
+var _sweetalert = require("sweetalert2");
+var _sweetalertDefault = _parcelHelpers.interopDefault(_sweetalert);
+'./accounts';
+let store = new _storeDefault.default();
+const helperFunc = new _helperHelperfuncJs.Helper();
+const html = new _htmlJs.Html();
+const ui = new _htmlJs.UI();
+class User {
+  currentUser;
+  constructor(userFullName, userName, userPin, userMobile, userBVN) {
+    this.userFullName = userFullName;
+    this.userName = userName;
+    this.userPin = userPin;
+    this.userMobile = userMobile;
+    this.userBVN = userBVN;
+    this.acc = [];
+    this.register();
+    this.userLogin();
+    this.makeTransfer();
+    this.logOut();
+  }
+  register() {
+    helperFunc.suggestBVN();
+    helperFunc.setAccountType();
+    html.btnRegister.addEventListener('click', _controllerRegisterJs.register);
+  }
+  createAcc(accNumber, accBalance, movementsDate, accType, accInterest, minAmount, maxAmount, idenType, idenNumber) {
+    let newAcc;
+    newAcc = accType === 'Tier Three' ? new _accountsJs.Tier3(accNumber, accBalance, movementsDate, accType, accInterest, minAmount, maxAmount, idenType, idenNumber) : new _accountsJs.Maintier(accNumber, accBalance, movementsDate, accType, accInterest, minAmount, maxAmount);
+    // new AccType()
+    this.acc.push(newAcc);
+  }
+  userLogin() {
+    html.btnLogin.addEventListener('click', e => {
+      e.preventDefault();
+      this.currentUser = _controllerLoginJs.login(html.inputLoginUsername.value, html.inputLoginPin.value);
+    });
+  }
+  makeTransfer() {
+    let allUsers = store.getAllUsers();
+    html.btnTransfer.addEventListener('click', e => {
+      e.preventDefault();
+      let transactionOTP = helperFunc.generateOTP();
+      let transferAmount = Number(html.inputTransferAmount.value);
+      let receiverAcc = html.inputTransferTo.value;
+      // find where receiver accountNo is equal to sender input
+      let receiverDetail = allUsers.map(user => user.acc).flat().find(acc => String(acc.accNumber) === receiverAcc);
+      // check if currentUser have enough money and if the receiver acc exist and if the transferAmount is possitive
+      let currentUserAcc = this.currentUser.acc.find(acc => acc.mov);
+      let transferCondition = currentUserAcc.accBalance >= transferAmount && receiverAcc && receiverAcc !== String(currentUserAcc.accNumber) && transferAmount > 0;
+      if (transferCondition && receiverDetail) {
+        const total = receiverDetail?.mov?.reduce?.((a, b) => a + b, 0);
+        allUsers.forEach(user => {
+          if (user.userFullName === this.currentUser.userFullName) {
+            // Check for Maximum balance for each account type
+            let maxBalanceCheck = receiverDetail.accType === 'Tier One' && total + transferAmount <= 100000 || receiverDetail.accType === 'Tier Two' && total + transferAmount <= 1000000 || receiverDetail.accType === 'Tier Three' && total + transferAmount <= 5000000;
+            if (maxBalanceCheck && transactionOTP) {
+              // Prompt User to Supply OTP
+              _sweetalertDefault.default.fire({
+                title: 'supply OTP',
+                text: `input this OTP code (${transactionOTP}) to conplete this transaction`,
+                icon: 'info',
+                input: 'text'
+              }).then(fulfiled => {
+                if (fulfiled.isConfirmed && fulfiled.value === transactionOTP) {
+                  // Generate time and date and push it to movementsDate
+                  const dateAndTime = helperFunc.timeStamp();
+                  currentUserAcc.movementsDate.push(dateAndTime);
+                  receiverDetail.movementsDate.push(dateAndTime);
+                  // Debit the sender
+                  currentUserAcc.mov.push(-transferAmount);
+                  // Credit the Receiver
+                  receiverDetail.mov.push(transferAmount);
+                  store.saveAllUsers(allUsers);
+                  console.log(allUsers);
+                  console.log(currentUserAcc);
+                  // update UI
+                  ui.updateUI(this.currentUser);
+                  // clearField
+                  html.inputTransferAmount.value = '';
+                  html.inputTransferTo.value = '';
+                  transferAmount.blur;
+                  // Toast a successful message
+                  ui.toast('success', 'Transfer Successful');
+                } else {
+                  ui.toast('error', 'Wrong OTP');
+                }
+              });
+            } else {
+              _sweetalertDefault.default.fire({
+                title: 'Warning',
+                text: 'Maximum amount for the receiver exceeded',
+                icon: 'error'
+              });
+            }
+          }
+        });
+      } else {
+        // Sweet Alert here
+        _sweetalertDefault.default.fire('Warning', 'Wrong Receiver info.', 'error');
+      }
+    });
+  }
+  logOut() {
+    html.btnLogOut.addEventListener('click', () => {
+      html.containerApp.style.opacity = 0;
+      html.btnLogOut.classList.add('hidden');
+      html.btnLoginOpenModal.classList.remove('hidden');
+      html.btnSignupOpenModal.classList.remove('hidden');
+      // reload the page
+      location.reload();
+    });
+  }
+}
+;
+
+},{"sweetalert2":"65nX0","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","./helper/helperfunc.js":"3tc7X","./html.js":"1vBA1","./store":"1jgH9","./accounts.js":"18vnr","./controller/login.js":"7oMYB","./controller/register.js":"4bQox"}],"65nX0":[function(require,module,exports) {
 var define;
 /*!
 * sweetalert2 v11.0.18
@@ -15518,6 +15650,704 @@ if (typeof this !== 'undefined' && this.Sweetalert2) {
   }
 })(document, ".swal2-popup.swal2-toast{box-sizing:border-box;grid-column:1/4!important;grid-row:1/4!important;grid-template-columns:1fr 99fr 1fr;padding:1em;overflow-y:hidden;background:#fff;box-shadow:0 0 .625em #d9d9d9;pointer-events:all}.swal2-popup.swal2-toast>*{grid-column:2}.swal2-popup.swal2-toast .swal2-title{margin:1em;padding:0;font-size:1em;text-align:initial}.swal2-popup.swal2-toast .swal2-loading{justify-content:center}.swal2-popup.swal2-toast .swal2-input{height:2em;margin:.5em;font-size:1em}.swal2-popup.swal2-toast .swal2-validation-message{font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{grid-column:3/3;grid-row:1/99;align-self:center;width:.8em;height:.8em;margin:0;font-size:2em}.swal2-popup.swal2-toast .swal2-html-container{margin:1em;padding:0;font-size:1em;text-align:initial}.swal2-popup.swal2-toast .swal2-html-container:empty{padding:0}.swal2-popup.swal2-toast .swal2-loader{grid-column:1;grid-row:1/99;align-self:center;width:2em;height:2em;margin:.25em}.swal2-popup.swal2-toast .swal2-icon{grid-column:1;grid-row:1/99;align-self:center;width:2em;min-width:2em;height:2em;margin:0 .5em 0 0}.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:700}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{justify-content:flex-start;height:auto;margin:0;margin-top:.3125em;padding:0}.swal2-popup.swal2-toast .swal2-styled{margin:.25em .5em;padding:.4em .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(100,150,200,.5)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-container{display:grid;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;box-sizing:border-box;grid-template-areas:\"top-start     top            top-end\" \"center-start  center         center-end\" \"bottom-start  bottom-center  bottom-end\" \"gap gap gap\";grid-template-rows:auto auto auto .625em;height:100%;padding:.625em .625em 0;overflow-x:hidden;transition:background-color .1s;-webkit-overflow-scrolling:touch}.swal2-container::after{content:\"\";grid-column:1/4;grid-row:4;height:.625em}.swal2-container.swal2-backdrop-show,.swal2-container.swal2-noanimation{background:rgba(0,0,0,.4)}.swal2-container.swal2-backdrop-hide{background:0 0!important}.swal2-container.swal2-bottom-start,.swal2-container.swal2-center-start,.swal2-container.swal2-top-start{grid-template-columns:minmax(0,1fr) auto auto}.swal2-container.swal2-bottom,.swal2-container.swal2-center,.swal2-container.swal2-top{grid-template-columns:auto minmax(0,1fr) auto}.swal2-container.swal2-bottom-end,.swal2-container.swal2-center-end,.swal2-container.swal2-top-end{grid-template-columns:auto auto minmax(0,1fr)}.swal2-container.swal2-top-start>.swal2-popup{align-self:start}.swal2-container.swal2-top>.swal2-popup{grid-column:2;align-self:start;justify-self:center}.swal2-container.swal2-top-end>.swal2-popup,.swal2-container.swal2-top-right>.swal2-popup{grid-column:3;align-self:start;justify-self:end}.swal2-container.swal2-center-left>.swal2-popup,.swal2-container.swal2-center-start>.swal2-popup{grid-row:2;align-self:center}.swal2-container.swal2-center>.swal2-popup{grid-column:2;grid-row:2;align-self:center;justify-self:center}.swal2-container.swal2-center-end>.swal2-popup,.swal2-container.swal2-center-right>.swal2-popup{grid-column:3;grid-row:2;align-self:center;justify-self:end}.swal2-container.swal2-bottom-left>.swal2-popup,.swal2-container.swal2-bottom-start>.swal2-popup{grid-column:1;grid-row:3;align-self:end}.swal2-container.swal2-bottom>.swal2-popup{grid-column:2;grid-row:3;justify-self:center;align-self:end}.swal2-container.swal2-bottom-end>.swal2-popup,.swal2-container.swal2-bottom-right>.swal2-popup{grid-column:3;grid-row:3;align-self:end;justify-self:end}.swal2-container.swal2-grow-fullscreen>.swal2-popup,.swal2-container.swal2-grow-row>.swal2-popup{grid-column:1/4;width:100%}.swal2-container.swal2-grow-column>.swal2-popup,.swal2-container.swal2-grow-fullscreen>.swal2-popup{grid-row:1/4;align-self:stretch}.swal2-container.swal2-no-transition{transition:none!important}.swal2-popup{display:none;position:relative;box-sizing:border-box;width:32em;max-width:100%;padding:0 0 1.25em;border:none;border-radius:5px;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-title{position:relative;max-width:100%;margin:0;padding:.8em 1em 0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;box-sizing:border-box;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0;padding:0}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-loader{display:none;align-items:center;justify-content:center;width:2.2em;height:2.2em;margin:0 1.875em;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border-width:.25em;border-style:solid;border-radius:100%;border-color:#2778c4 transparent #2778c4 transparent}.swal2-styled{margin:.3125em;padding:.625em 1.1em;transition:box-shadow .1s;box-shadow:0 0 0 3px transparent;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#7367f0;color:#fff;font-size:1em}.swal2-styled.swal2-confirm:focus{box-shadow:0 0 0 3px rgba(115,103,240,.5)}.swal2-styled.swal2-deny{border:0;border-radius:.25em;background:initial;background-color:#ea5455;color:#fff;font-size:1em}.swal2-styled.swal2-deny:focus{box-shadow:0 0 0 3px rgba(234,84,85,.5)}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#6e7d88;color:#fff;font-size:1em}.swal2-styled.swal2-cancel:focus{box-shadow:0 0 0 3px rgba(110,125,136,.5)}.swal2-styled.swal2-default-outline:focus{box-shadow:0 0 0 3px rgba(100,150,200,.5)}.swal2-styled:focus{outline:0}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1em 0 0;padding:1em 1em 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;grid-column:auto!important;height:.25em;overflow:hidden;border-bottom-right-radius:5px;border-bottom-left-radius:5px}.swal2-timer-progress-bar{width:100%;height:.25em;background:rgba(0,0,0,.2)}.swal2-image{max-width:100%;margin:2em auto 1em}.swal2-close{z-index:2;align-items:center;justify-content:center;width:1.2em;height:1.2em;margin-top:0;margin-right:0;margin-bottom:-1.2em;padding:0;overflow:hidden;transition:color .1s,box-shadow .1s;border:none;border-radius:5px;background:0 0;color:#ccc;font-family:serif;font-family:monospace;font-size:2.5em;cursor:pointer;justify-self:end}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-close:focus{outline:0;box-shadow:inset 0 0 0 3px rgba(100,150,200,.5)}.swal2-close::-moz-focus-inner{border:0}.swal2-html-container{z-index:1;justify-content:center;margin:0;padding:1em 1.6em .3em;color:#545454;font-size:1.125em;font-weight:400;line-height:normal;text-align:center;word-wrap:break-word;word-break:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em 2em 0}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:auto;transition:border-color .1s,box-shadow .1s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06),0 0 0 3px transparent;color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:inset 0 1px 1px rgba(0,0,0,.06),0 0 0 3px rgba(100,150,200,.5)}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em 2em 0;background:#fff}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{width:75%;margin-right:auto;margin-left:auto;background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:#fff;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{flex-shrink:0;margin:0 .4em}.swal2-input-label{display:flex;justify-content:center;margin:1em auto 0}.swal2-validation-message{align-items:center;justify-content:center;margin:1em 0 0;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:\"!\";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:2.5em auto .6em;border:.25em solid transparent;border-radius:50%;border-color:#000;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474;color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-error.swal2-icon-show{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86;color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-progress-steps{flex-wrap:wrap;align-items:center;max-width:100%;margin:1.25em auto;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;flex-shrink:0;width:2em;height:2em;border-radius:2em;background:#2778c4;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#2778c4}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;flex-shrink:0;width:2.5em;height:.4em;margin:0 -1px;background:#2778c4}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{margin-right:initial;margin-left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-container{background-color:transparent!important;pointer-events:none}body.swal2-no-backdrop .swal2-container .swal2-popup{pointer-events:all}body.swal2-no-backdrop .swal2-container .swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}body.swal2-toast-shown .swal2-container{box-sizing:border-box;width:360px;max-width:100%;background-color:transparent;pointer-events:none}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}");
 
-},{}]},["63iPG","4ThtM"], "4ThtM", "parcelRequire223e")
+},{}],"5gA8y":[function(require,module,exports) {
+"use strict";
 
-//# sourceMappingURL=index.b4f5078c.js.map
+exports.interopDefault = function (a) {
+  return a && a.__esModule ? a : {
+    default: a
+  };
+};
+
+exports.defineInteropFlag = function (a) {
+  Object.defineProperty(a, '__esModule', {
+    value: true
+  });
+};
+
+exports.exportAll = function (source, dest) {
+  Object.keys(source).forEach(function (key) {
+    if (key === 'default' || key === '__esModule') {
+      return;
+    } // Skip duplicate re-exports when they have the same value.
+
+
+    if (key in dest && dest[key] === source[key]) {
+      return;
+    }
+
+    Object.defineProperty(dest, key, {
+      enumerable: true,
+      get: function () {
+        return source[key];
+      }
+    });
+  });
+  return dest;
+};
+
+exports.export = function (dest, destName, get) {
+  Object.defineProperty(dest, destName, {
+    enumerable: true,
+    get: get
+  });
+};
+},{}],"3tc7X":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "Helper", function () {
+  return Helper;
+});
+var _sweetalert = require("sweetalert2");
+var _sweetalertDefault = _parcelHelpers.interopDefault(_sweetalert);
+var _html = require('../html');
+const html = new _html.Html();
+class Helper {
+  // Private Variables
+  constructor() {
+    this.calcDate();
+  }
+  _calcInterest() {
+    let intRate = Date.now();
+    let newrate = Number(intRate.toString().split('').slice(11, 14).join('')) / 10;
+    return newrate;
+  }
+  _generateBVN() {
+    let newDate = Date.now();
+    let newBVN = Number(newDate.toString().split('').slice(3, 14).join(''));
+    return newBVN;
+  }
+  _generateAccountNumber() {
+    return this._generateBVN() - 1111000000;
+  }
+  timeStamp() {
+    const time = Date.now();
+    let date = new Date(time);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+    let hour;
+    if (date.getHours() === 12) {
+      hour = date.getHours() + 1;
+    } else {
+      date.getHours() > 12 ? hour = date.getHours() - 12 : hour = date.getHours();
+    }
+    const minute = date.getMinutes();
+    let seconds;
+    String(date.getSeconds()).length > 1 ? seconds = date.getSeconds() : seconds = `0${date.getSeconds()}`;
+    return `${day}/${month}/${year}      ${hour}:${minute}:${seconds}`;
+  }
+  checkMinimumAmount(accType, type, minAmount) {
+    if (type === accType && Number(html.amountField.value) !== minAmount) {
+      _sweetalertDefault.default.fire({
+        title: 'Error',
+        text: `Minimum amount for Tier ${type} is ${minAmount}`,
+        icon: 'error'
+      });
+      return;
+    }
+  }
+  suggestBVN() {
+    html.bvnField.addEventListener('focus', e => {
+      e.target.value = this._generateBVN();
+    });
+  }
+  /*Hide BVN field for Tier One & Display identity fields for Tier three*/
+  setAccountType() {
+    html.accountTypeField.addEventListener('change', function (e) {
+      let accountType = e.target.value;
+      // Hide bvn field if Account type is Tier One
+      if (accountType === "Tier One") {
+        html.bvnField.value = '';
+        html.bvnField.style.display = 'none';
+        html.labelBVN.style.display = 'none';
+      } else {
+        html.bvnField.style.display = 'block';
+        html.labelBVN.style.display = 'block';
+      }
+      // Display identity fields if account type is Tier three
+      if (accountType === "Tier Three") {
+        html.idTypeSpan.classList.remove('display_none');
+        html.idNumberSpan.classList.remove('display_none');
+      } else {
+        html.idTypeSpan.classList.add('display_none');
+        html.idNumberSpan.classList.add('display_none');
+      }
+    });
+  }
+  setTier3ID(accType, idtype, idNo) {
+    if (accType === "Tier Three") {
+      idtype = html.idTypeField.value;
+      idNo = html.idNumberField.value;
+    }
+  }
+  clearInputFields() {
+    // Clear input fields
+    html.fullNameField.value = html.mobileField.value = html.userNameField.value = html.amountField.value = html.passwordField.value = html.bvnField.value = '';
+  }
+  calcDate() {
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    // return `${day}/${month}/${year}`;
+    let todayDate = `${day}/${month}/${year}`;
+    html.labelDate.textContent = todayDate;
+  }
+  generateOTP() {
+    let otp = Date.now();
+    otp = String(otp).split('').slice(8, 13).join('');
+    return otp;
+  }
+}
+
+},{"sweetalert2":"65nX0","../html":"1vBA1","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1vBA1":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "Html", function () {
+  return Html;
+});
+_parcelHelpers.export(exports, "UI", function () {
+  return UI;
+});
+var _modulesModalJs = require('../modules/modal.js');
+var _sweetalert = require("sweetalert2");
+var _sweetalertDefault = _parcelHelpers.interopDefault(_sweetalert);
+class Html {
+  constructor() {}
+  /*export test = 'Just testing';*/
+  containerApp = document.querySelector('.app');
+  containerMovements = document.querySelector('.movements');
+  btnLogin = document.querySelector('.login__btn');
+  btnTransfer = document.querySelector('.form__btn--transfer');
+  btnLoan = document.querySelector('.form__btn--loan');
+  btnClose = document.querySelector('.form__btn--close');
+  btnSort = document.querySelector('.btn--sort');
+  btnLoginOpenModal = document.querySelector('.open_login-modal');
+  btnSignupOpenModal = document.querySelector('.open_signup-modal');
+  btnLogOut = document.querySelector('.logout');
+  inputLoginUsername = document.querySelector('.login__input--user');
+  inputLoginPin = document.querySelector('.login__input--pin');
+  inputTransferTo = document.querySelector('.form__input--to');
+  inputTransferAmount = document.querySelector('.form__input--amount');
+  inputLoanAmount = document.querySelector('.form__input--loan-amount');
+  inputCloseUsername = document.querySelector('.form__input--user');
+  inputClosePin = document.querySelector('.form__input--pin');
+  labelWelcome = document.querySelector('.welcome');
+  labelBVN = document.querySelector('.bvn_label');
+  labelACC = document.querySelector('.acc_label');
+  labelAccType = document.querySelector('.acc-type_label');
+  // Elements
+  labelBalance = document.querySelector('.balance__value');
+  labelSumIn = document.querySelector('.summary__value--in');
+  labelSumOut = document.querySelector('.summary__value--out');
+  labelSumInterest = document.querySelector('.summary__value--interest');
+  labelTimer = document.querySelector('.timer');
+  labelDate = document.querySelector('.date');
+  loginModal = document.querySelector('.login_modal');
+  signupModal = document.querySelector('.signup_modal');
+  overlay = document.querySelector('.overlay');
+  loginCloseModal = document.querySelector('.login_btn--close-modal');
+  signupCloseModal = document.querySelector('.signup_btn--close-modal');
+  // BTNs
+  btnLoginOpenModal = document.querySelector('.open_login-modal');
+  btnSignupOpenModal = document.querySelector('.open_signup-modal');
+  // Duplicate
+  btnRegister = document.querySelector('.register_button');
+  // '.register_form'
+  // input fields
+  fullNameField = document.querySelector('.fullname');
+  mobileField = document.querySelector('.mobile');
+  userNameField = document.querySelector('.user_name');
+  amountField = document.querySelector('.amount');
+  passwordField = document.querySelector('.password');
+  bvnField = document.querySelector('.bvn');
+  accountTypeField = document.querySelector('#account_type');
+  idTypeField = document.querySelector('.id_type');
+  idNumberField = document.querySelector('.id_number');
+  // Others
+  labelBVN = document.querySelector('.bvn_labell');
+  idTypeSpan = document.querySelector('.id_type-span');
+  idNumberSpan = document.querySelector('.id_number-span');
+}
+;
+let html = new Html();
+let modal = new _modulesModalJs.Modal(html.btnSignupOpenModal, html.btnLoginOpenModal);
+class UI {
+  constructor() {}
+  /*method to display Logout button after user login*/
+  disPlayLogoutBtn() {
+    html.btnLoginOpenModal.classList.add('hidden');
+    html.btnSignupOpenModal.classList.add('hidden');
+    html.btnLogOut.classList.remove('hidden');
+  }
+  logUserInfo(user) {
+    // Make UI visible
+    html.containerApp.style.opacity = 1;
+    // Display welome message
+    // let fName = user.owner.split(' ')[0]
+    html.labelWelcome.textContent = `Welcome here ${user.userFullName}`;
+    html.labelWelcome.classList.add('highlight');
+    // Setting User BVN
+    // labelBVN.textContent = `BVN : ${user.bvn}`;
+    // labelBVN.classList.remove('hidden');
+    // Setting User ACC
+    let aza = user.acc.map(accT => accT.accNumber);
+    html.labelACC.textContent = ` ACC: ${aza[0]}`;
+    html.labelACC.classList.remove('hidden');
+    html.labelACC.style.paddingLeft = '15px';
+    // Setting User Account Type
+    let accType = user.acc.map(accT => accT.accType);
+    html.labelAccType.textContent = `Type: ${accType[0]}`;
+    html.labelAccType.classList.remove('hidden');
+    html.labelAccType.style.paddingLeft = '10px';
+    // Clear input field and let it loose focus
+    html.inputLoginUsername.value = '';
+    html.inputLoginPin.value = '';
+    html.inputLoginPin.blur;
+    // Close Modal
+    modal.hideModal();
+    this.disPlayLogoutBtn();
+  }
+  appendMovement(user, sorted = false) {
+    html.containerMovements.innerHTML = '';
+    let movements = user.acc.map(accT => accT.mov);
+    let movemenetDate = user.acc.map(accT => accT.movementsDate);
+    const movs = sorted ? movements[0].sort((a, d) => d - a) : movements[0];
+    // let dateTime = this.timeStamp();
+    let movRow;
+    movs.map((mov, index) => {
+      // Create Html element to insert the movements to
+      const type = mov > 0 ? 'credit' : 'debit';
+      let currentDate = movemenetDate[0][index];
+      // Create all elements with javascript
+      movRow = document.createElement('div');
+      movRow.classList.add('movements__row');
+      const movType = document.createElement('div');
+      movType.classList.add(`movements__type`, `movements__type--${type}`);
+      movType.textContent = `${index + 1} ${type}`;
+      let movDate = document.createElement('div');
+      movDate.classList.add('movements__date');
+      movDate.textContent = `${currentDate}`;
+      const movValue = document.createElement('div');
+      movValue.classList.add('movements__value');
+      movValue.textContent = `${mov}€`;
+      // Append them inside each other
+      movRow.appendChild(movType);
+      movRow.appendChild(movDate);
+      movRow.appendChild(movValue);
+      // Append movRow to parent container
+      html.containerMovements.insertAdjacentElement('afterbegin', movRow);
+    });
+  }
+  balance(user) {
+    let move = user.acc.map(accT => accT.mov);
+    move[0].accBalance = move[0].reduce((acc, cur) => {
+      return acc + cur;
+    }, 0);
+    html.labelBalance.textContent = `${move[0].accBalance}€`;
+  }
+  calcSumary(user) {
+    let movements = user.acc.map(accT => accT.mov);
+    let accInterests = user.acc.map(accT => accT.accInterest);
+    const income = movements.filter(mov => mov > 0).reduce((acc, cur) => acc + cur, 0);
+    html.labelSumIn.textContent = `${income}€`;
+    const outcome = movements.filter(mov => mov < 0).reduce((acc, cur) => acc + cur, 0);
+    html.labelSumOut.textContent = `${Math.abs(outcome)}€`;
+    const interest = movements.filter(mov => mov > 0).map(int => int * accInterests[0] / 100).filter(int => int >= 1).reduce((acc, cur) => acc + cur, 0);
+    html.labelSumInterest.textContent = `${interest.toFixed(1)}€`;
+  }
+  /*Update Ui*/
+  updateUI(user) {
+    // Calculate CurrentUser Movements
+    this.appendMovement(user);
+    // appendMovement(user.movements);
+    // Calculate user Ballance
+    this.balance(user);
+    // Calculate user Summary
+    this.calcSumary(user);
+  }
+  calcDate() {
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    // return `${day}/${month}/${year}`;
+    let todayDate = `${day}/${month}/${year}`;
+    labelDate.textContent = todayDate;
+  }
+  /*For SweetAlert Toast*/
+  toast(icon, msg) {
+    const Toast = _sweetalertDefault.default.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: toast => {
+        toast.addEventListener('mouseenter', _sweetalertDefault.default.stopTimer);
+        toast.addEventListener('mouseleave', _sweetalertDefault.default.resumeTimer);
+      }
+    });
+    Toast.fire({
+      icon: icon,
+      title: msg
+    });
+  }
+}
+
+},{"../modules/modal.js":"4rHhP","sweetalert2":"65nX0","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"4rHhP":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "Modal", function () {
+  return Modal;
+});
+// import Swal from '../node_modules/sweetalert2/src/sweetalert2.js';
+// import Swal from "sweetalert2";
+const loginModal = document.querySelector('.login_modal');
+const signupModal = document.querySelector('.signup_modal');
+const overlay = document.querySelector('.overlay');
+const loginCloseModal = document.querySelector('.login_btn--close-modal');
+const signupCloseModal = document.querySelector('.signup_btn--close-modal');
+// BTNs
+const btnLoginOpenModal = document.querySelector('.open_login-modal');
+const btnSignupOpenModal = document.querySelector('.open_signup-modal');
+const btnRegister = document.querySelector('.register_button');
+// '.register_form'
+// input fields
+const fullNameField = document.querySelector('.fullname');
+const mobileField = document.querySelector('.mobile');
+const userNameField = document.querySelector('.user_name');
+const amountField = document.querySelector('.amount');
+const passwordField = document.querySelector('.password');
+const bvnField = document.querySelector('.bvn');
+const accountTypeField = document.querySelector('#account_type');
+const idTypeField = document.querySelector('.id_type');
+const idNumberField = document.querySelector('.id_number');
+// Others
+const labelBVN = document.querySelector('.bvn_labell');
+const idTypeSpan = document.querySelector('.id_type-span');
+const idNumberSpan = document.querySelector('.id_number-span');
+class Modal {
+  constructor(btnSignupOpenModal, btnLoginOpenModal) {
+    // Set Paramenter to Open Modal
+    this.btnSignupOpenModal = btnSignupOpenModal;
+    this.btnLoginOpenModal = btnLoginOpenModal;
+    this._openModal(this.btnLoginOpenModal, loginModal);
+    this._openModal(this.btnSignupOpenModal, signupModal);
+    this._closeModal(loginCloseModal, loginModal);
+    this._closeModal(signupCloseModal, signupModal);
+  }
+  /*This method will show modal on button click*/
+  showModal(modal = loginModal) {
+    modal.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+  }
+  /*This method invoke showModal method but it's a private method*/
+  _openModal(btn = btnLoginOpenModal, modal) {
+    btn.addEventListener('click', () => {
+      this.showModal(modal);
+    });
+  }
+  /*Method to hide modal.*/
+  hideModal(modal = loginModal) {
+    modal.classList.add('hidden');
+    overlay.classList.add('hidden');
+  }
+  _closeModal(btn, modal) {
+    // Add event listener to the btn passed in
+    btn.addEventListener('click', () => {
+      this.hideModal(modal);
+    });
+    // Add evebt listener to overlay to close modal
+    overlay.addEventListener('click', () => {
+      this.hideModal(modal);
+    });
+  }
+}
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1jgH9":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+class Store {
+  currentUser;
+  alluser = JSON.parse(localStorage.getItem('UserData')) || [];
+  saveUser(user) {
+    this.alluser.push(user);
+    localStorage.setItem('UserData', JSON.stringify(this.alluser));
+  }
+  saveAllUsers(users) {
+    localStorage.setItem('UserData', JSON.stringify(users));
+  }
+  getAllUsers() {
+    return JSON.parse(localStorage.getItem('UserData')) || [];
+  }
+  getCurrentUser(allUsers, userName) {
+    this.currentUser = allUsers.find(user => {
+      return user.userName === userName;
+    });
+    return this.currentUser;
+  }
+}
+exports.default = Store;
+;
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"18vnr":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "Maintier", function () {
+  return Maintier;
+});
+_parcelHelpers.export(exports, "Tier3", function () {
+  return Tier3;
+});
+class Account {
+  constructor(accNumber, accBalance, movementsDate) {
+    this.accNumber = accNumber;
+    this.accBalance = accBalance;
+    this.movementsDate = movementsDate;
+  }
+}
+;
+class Maintier extends Account {
+  constructor(accNumber, accBalance, movementsDate, accType, accInterest, minAmount, maxAmount) {
+    super(accNumber, accBalance, movementsDate);
+    this.accType = accType;
+    this.accInterest = accInterest;
+    this.minAmount = minAmount;
+    this.maxAmount = maxAmount;
+    this.mov = [accBalance];
+  }
+}
+;
+class Tier3 extends Maintier {
+  constructor(accNumber, accBalance, movementsDate, accType, accInterest, minAmount, maxAmount, idenType, idenNumber) {
+    super(accNumber, accBalance, movementsDate, accType, accInterest, minAmount, maxAmount);
+    this.idenType = idenType;
+    this.idenNumber = idenNumber;
+  }
+}
+;
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"7oMYB":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "login", function () {
+  return login;
+});
+var _htmlJs = require("../html.js");
+var _sweetalert = require("sweetalert2");
+var _sweetalertDefault = _parcelHelpers.interopDefault(_sweetalert);
+var _storeJs = require('../store.js');
+var _storeJsDefault = _parcelHelpers.interopDefault(_storeJs);
+const html = new _htmlJs.Html();
+const ui = new _htmlJs.UI();
+const store = new _storeJsDefault.default();
+allUsers = store.getAllUsers();
+function login(userName, userPin) {
+  let currentUser = store.getCurrentUser(allUsers, html.inputLoginUsername.value);
+  // Log User in if credentials are correct! else display error message.
+  // const loginDetails = this.currentUser?.userPin === html.inputLoginPin.value &&
+  // this.currentUser?.userName == html.inputLoginUsername.value;
+  const loginDetails = currentUser?.userPin === userPin && currentUser?.userName == userName;
+  if (loginDetails) {
+    // Log User Information
+    ui.logUserInfo(currentUser);
+    // Amend this
+    // display Logout button after user login
+    ui.disPlayLogoutBtn();
+    // update UI
+    ui.updateUI(currentUser);
+  } else {
+    // Sweet Alart here.
+    _sweetalertDefault.default.fire('Warning', 'Wrong Log in details', 'error');
+  }
+  console.log(allUsers);
+  return currentUser;
+}
+
+},{"../html.js":"1vBA1","sweetalert2":"65nX0","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../store.js":"1jgH9"}],"4bQox":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "register", function () {
+  return register;
+});
+var _helperHelperfuncJs = require("../helper/helperfunc.js");
+var _htmlJs = require("../html.js");
+var _storeJs = require('../store.js');
+var _storeJsDefault = _parcelHelpers.interopDefault(_storeJs);
+var _modalJs = require('../modal.js');
+var _sweetalert = require("sweetalert2");
+var _sweetalertDefault = _parcelHelpers.interopDefault(_sweetalert);
+var _userJs = require("../user.js");
+let store = new _storeJsDefault.default();
+const helperFunc = new _helperHelperfuncJs.Helper();
+const html = new _htmlJs.Html();
+let allUsers = store.getAllUsers();
+const modal = new _modalJs.Modal(html.btnSignupOpenModal, html.btnLoginOpenModal);
+let accountType = {
+  tier1: "Tier One",
+  tier2: "Tier Two",
+  tier3: "Tier Three"
+};
+let accType;
+html.accountTypeField.addEventListener('change', e => accType = e.target.value);
+function register(e) {
+  e.preventDefault();
+  let userNameExist;
+  // Get the value for all input fields
+  let userFullName = html.fullNameField.value;
+  let userMobile = html.mobileField.value;
+  let userName = html.userNameField.value;
+  let amount = Number(html.amountField.value);
+  // Value Converted to number;;
+  let userPin = html.passwordField.value;
+  let accNumber = helperFunc._generateAccountNumber();
+  let bvn, idenType, idenNumber, minAmount, maxAmount;
+  let movementsDate = [helperFunc.timeStamp()];
+  let accInterest = helperFunc._calcInterest();
+  const required = userFullName !== '' && userMobile !== '' && userName !== '' && amount !== '' && userPin !== '';
+  // No BVN for Tier One acount
+  accType === accountType.tier1 ? bvn = undefined : bvn = html.bvnField.value;
+  // Set identity type and number for Tier Three
+  if (accType === "Tier Three") {
+    idenType = html.idTypeField.value;
+    idenNumber = html.idNumberField.value;
+  }
+  // set minimum and maximum amount for each account type
+  if (accType === accountType.tier1) {
+    maxAmount = 500000;
+    minAmount = 1000;
+  }
+  if (accType === accountType.tier2) {
+    maxAmount = 2000000;
+    minAmount = 5000;
+  }
+  if (accType === accountType.tier3) {
+    maxAmount = 5000000;
+    minAmount = 20000;
+  }
+  const authUser = () => {
+    let tier1Range = Number(html.amountField.value) >= 1000 && Number(html.amountField.value) <= 500000;
+    if (accType === "Tier One" && !tier1Range) {
+      _sweetalertDefault.default.fire({
+        title: 'Error',
+        text: `Amount for Tier One is between 1,000 - 500,000`,
+        icon: 'error'
+      });
+      return;
+    }
+    let tier2Range = Number(html.amountField.value) >= 5000 && Number(html.amountField.value) <= 2000000;
+    if (accType === "Tier Two" && !tier2Range) {
+      _sweetalertDefault.default.fire({
+        title: 'Error',
+        text: `Amount for Tier Two is between 5,000 - 2,000,000`,
+        icon: 'error'
+      });
+      return;
+    }
+    let tier3Range = Number(html.amountField.value) >= 20000 && Number(html.amountField.value) <= 5000000;
+    if (accType === "Tier Three" && !tier3Range) {
+      _sweetalertDefault.default.fire({
+        title: 'Error',
+        text: `Amount for Tier Three is between 20,000 - 5,000,000`,
+        icon: 'error'
+      });
+      return;
+    }
+    // create a new user
+    const user = new _userJs.User(userFullName, userName, userPin, userMobile, bvn);
+    // Create new account for user;
+    user.createAcc(accNumber, amount, movementsDate, accType, accInterest, minAmount, maxAmount, idenType, idenNumber);
+    // Add user info to the store
+    store.saveUser(user);
+    // Clear input fields
+    helperFunc.clearInputFields();
+    modal.hideModal(html.signupModal);
+    // After Successful Registration, Load Login Modal Automatically.
+    _sweetalertDefault.default.fire({
+      title: 'Success',
+      text: 'Registration Successful, Kindly Login',
+      icon: 'success'
+    }).then(fulfilled => {
+      if (fulfilled) {
+        // Reload Page for login to take effect.
+        location.reload();
+      }
+    });
+  };
+  // If there is registered user then check if the userName user try to register does not exist.
+  if (allUsers.length > 0) {
+    userNameExist = allUsers.map(acc => acc.userName).some(user => user === html.userNameField.value);
+  }
+  if (userNameExist) {
+    // if yes Alart Error
+    _sweetalertDefault.default.fire({
+      title: 'Error',
+      text: 'Username Alredy exist!',
+      icon: 'error'
+    });
+  } else {
+    // Check if amount match the minimum amount for each account type.
+    // Check if no user at all or all field are filled
+    if (allUsers.length === 0 && required || required) {
+      authUser();
+    } else {
+      _sweetalertDefault.default.fire({
+        title: 'Error',
+        text: 'All fields are require',
+        icon: 'error'
+      });
+    }
+  }
+}
+
+},{"../helper/helperfunc.js":"3tc7X","../html.js":"1vBA1","../store.js":"1jgH9","../modal.js":"50qz6","sweetalert2":"65nX0","../user.js":"5M7RE","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"50qz6":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "Modal", function () {
+  return Modal;
+});
+var _html = require('./html');
+const html = new _html.Html();
+class Modal {
+  constructor(btnSignupOpenModal, btnLoginOpenModal) {
+    // Set Paramenter to Open Modal
+    this.btnSignupOpenModal = btnSignupOpenModal;
+    this.btnLoginOpenModal = btnLoginOpenModal;
+    this._openModal(this.btnLoginOpenModal, html.loginModal);
+    this._openModal(this.btnSignupOpenModal, html.signupModal);
+    this._closeModal(html.loginCloseModal, html.loginModal);
+    this._closeModal(html.signupCloseModal, html.signupModal);
+  }
+  /*This method will show modal on button click*/
+  showModal(modal = html.loginModal) {
+    modal.classList.remove('hidden');
+    html.overlay.classList.remove('hidden');
+  }
+  /*This method invoke showModal method but it's a private method*/
+  _openModal(btn = html.btnLoginOpenModal, modal) {
+    btn.addEventListener('click', () => {
+      this.showModal(modal);
+    });
+  }
+  /*Method to hide modal.*/
+  hideModal(modal = html.loginModal) {
+    modal.classList.add('hidden');
+    html.overlay.classList.add('hidden');
+  }
+  _closeModal(btn, modal) {
+    // Add event listener to the btn passed in
+    btn.addEventListener('click', () => {
+      this.hideModal(modal);
+    });
+    // Add evebt listener to overlay to close modal
+    html.overlay.addEventListener('click', () => {
+      this.hideModal(modal);
+    });
+  }
+}
+
+},{"./html":"1vBA1","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["2Mlp2","6Ctme"], "6Ctme", "parcelRequire223e")
+
+//# sourceMappingURL=index.13d56bbf.js.map
