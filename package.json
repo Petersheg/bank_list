@@ -1,0 +1,26 @@
+{
+  "name": "bank-list",
+  "version": "1.0.0",
+  "description": "A bank app ",
+  "main": "newScript.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build newScript.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Petersheg/bank_list.git"
+  },
+  "author": "Peteru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Petersheg/bank_list/issues"
+  },
+  "homepage": "https://github.com/Petersheg/bank_list#readme",
+  "dependencies": {
+    "core-js": "^3.15.1",
+    "parcel": "^2.0.0-beta.2",
+    "regenerator-runtime": "^0.13.7",
+    "sweetalert2": "^11.0.18"
+  }
+}

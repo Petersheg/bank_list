@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/png" href="/icon.0cbf3630.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600&display=swap" rel="stylesheet">
+
+    <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <link rel="stylesheet" href="/index.f556d9ac.css">
+    <script type="module" src="/index.13d56bbf.js"></script>
+    <!-- <script src="script.js"></script> -->
+
+    <title>Bankist</title>
+  </head>
+  <body>
+    <!-- TOP NAVIGATION -->
+    <nav>
+      <p class="welcome">Log in to get started </p>
+      <!-- <p class="welcome hidden bvn_label">BVN Number Here</p> -->
+      <p class="welcome hidden acc_label">Account Number Here</p>
+      <p class="welcome hidden acc-type_label">Account Type Here</p>
+      <img src="/logo.fd6a1c34.png" alt="Logo" class="logo">
+      <button class="btn open_signup-modal">Sign Up</button>
+      <button class="btn open_login-modal">Login</button>
+      <button class="btn logout hidden">Log Out</button>
+    </nav>
+
+    <main class="app">
+      <!-- BALANCE -->
+      <div class="balance">
+        <div>
+          <p class="balance__label">Current balance</p>
+          <p class="balance__date">
+            As of <span class="date">05/03/2037</span>
+          </p>
+        </div>
+        <p class="balance__value">0000€</p>
+      </div>
+
+      <!-- MOVEMENTS -->
+      <div class="movements">
+        <div class="movements__row">
+          <div class="movements__type movements__type--credit">2 deposit</div>
+          <div class="movements__date">3 days ago</div>
+          <div class="movements__value">4 000€</div>
+        </div>
+        <div class="movements__row">
+          <div class="movements__type movements__type--debit">
+            1 withdrawal
+          </div>
+          <div class="movements__date">24/01/2037</div>
+          <div class="movements__value">-378€</div>
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="summary">
+        <p class="summary__label">In</p>
+        <p class="summary__value summary__value--in">0000€</p>
+        <p class="summary__label">Out</p>
+        <p class="summary__value summary__value--out">0000€</p>
+        <p class="summary__label">Interest</p>
+        <p class="summary__value summary__value--interest">0000€</p>
+        <button class="btn--sort">&downarrow; SORT</button>
+      </div>
+
+      <!-- OPERATION: TRANSFERS -->
+      <div class="operation operation--transfer">
+        <h2>Transfer money</h2>
+        <form class="form form--transfer">
+          <input type="text" class="form__input form__input--to">
+          <input type="number" class="form__input form__input--amount">
+          <button class="form__btn form__btn--transfer">&rarr;</button>
+          <label class="form__label">Transfer to</label>
+          <label class="form__label">Amount</label>
+        </form>
+      </div>
+
+      <!-- OPERATION: LOAN -->
+      <!-- <div class="operation operation--loan">
+        <h2>Request loan</h2>
+        <form class="form form--loan">
+          <input type="number" class="form__input form__input--loan-amount" />
+          <button class="form__btn form__btn--loan">&rarr;</button>
+          <label class="form__label form__label--loan">Amount</label>
+        </form>
+      </div> -->
+
+      <!-- OPERATION: CLOSE -->
+      <!-- <div class="operation operation--close">
+        <h2>Close account</h2>
+        <form class="form form--close">
+          <input type="text" class="form__input form__input--user" />
+          <input
+            type="password"
+            maxlength="6"
+            class="form__input form__input--pin"
+          />
+          <button class="form__btn form__btn--close">&rarr;</button>
+          <label class="form__label">Confirm user</label>
+          <label class="form__label">Confirm PIN</label>
+        </form>
+      </div> -->
+
+      <!-- LOGOUT TIMER -->
+      <!-- <p class="logout-timer">
+        You will be logged out in <span class="timer">05:00</span>
+      </p> -->
+    </main>
+
+    <!--SIGN UP MODAL -->
+    <div class="modal hidden signup_modal">
+      <button class="btn--close-modal signup_btn--close-modal">&times;</button>
+      <h2 class="modal__header">
+        <span class="highlight">welcome</span><br>
+        Register Yourself! 
+      </h2>
+
+      <form class=" register_form modal__form">
+        <label>Full Name</label>
+        <input type="text" class="fullname">
+        <label>User Name</label>
+        <input type="text" class="user_name">
+        <label>Mobile</label>
+        <input type="tel" class="mobile">
+        
+        <label>Account Type</label>
+        <select name="" id="account_type" class="select"> 
+          <option value="select">Select</option>
+          <option value="Tier One">Tier 1</option>
+          <option value="Tier Two">Tier 2</option>
+          <option value="Tier Three">Tier 3</option>
+        </select>
+
+        <span class="display_none id_type-span">
+          <label>Identity Type</label>
+          <input type="text" class="id_type" placeholder="National Passport">
+        </span>
+        
+        <span class="display_none id_number-span">
+          <label>Identity Number</label>
+          <input type="number" class="id_number" placeholder="126457678j0099">
+        </span>
+
+        <label>Starting Amount</label>
+        <input type="number" class="amount">
+
+        <label class="bvn_labell">BVN</label>
+        <input type="number" class="bvn">
+        <label>Password</label>
+        <input type="password" class="password">
+        <button class="btn  register_button">Register</button>
+      </form>
+
+      <div class="social">
+        <button class="social-signin facebook">Log in with facebook</button>
+      </div>
+      <div class="or">OR</div>
+
+
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal hidden login_modal">
+      <button class="btn--close-modal login_btn--close-modal">&times;</button>
+      <h2 class="modal__header">
+        <span class="highlight">Hello</span><br>
+        Kindly Login!
+      </h2>
+
+      <form class="modal__form">
+        <label>User Name</label>
+        <input class="login__input--user" type="text">
+        <label>Password</label>
+        <input class="login__input--pin" type="password">
+        <button class="btn login__btn">Login</button>
+      </form>
+    </div>
+
+    <div class="overlay hidden"></div>
+
+    <!-- <footer>
+      &copy; by Jonas Schmedtmann. Don't claim as your own :)
+    </footer> -->
+
+  </body>
+</html>
